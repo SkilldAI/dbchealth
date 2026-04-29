@@ -16,9 +16,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Application Structure Plan: Stripped away marketing fluff. Content strictly aligned with the DBC Integrative Review. Focuses on hard data (WHO bed density), physiological realities (cortisol, HRV, autonomic stress), and exact mechanisms (Two-Brain Logic, circulation continuity). Tone is academic, clinical, and urgent. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
     <script>
         tailwind.config = {
             theme: {
@@ -39,14 +36,11 @@
                             700: '#334155',
                             800: '#1e293b',
                             900: '#0f172a',
-                            accent1: '#0ea5e9', // Clinical Cyan
-                            accent2: '#1e3a8a', // Deep Medical Blue
-                            danger: '#b91c1c'   // Crimson
+                            navy: '#0a192f',     // Deep clinical navy
+                            blue: '#1d4ed8',     // Trust blue
+                            accent: '#0ea5e9',   // Cyan highlight
+                            alert: '#991b1b'     // Muted crimson for issues
                         }
-                    },
-                    boxShadow: {
-                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
-                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
                     }
                 }
             }
@@ -63,56 +57,48 @@
             position: absolute;
             inset: 0;
             z-index: 0;
-            opacity: 0.04;
-            background-image: linear-gradient(to right, #0f172a 1px, transparent 1px), linear-gradient(to bottom, #0f172a 1px, transparent 1px);
-            background-size: 24px 24px;
+            opacity: 0.05;
+            background-image: linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px);
+            background-size: 32px 32px;
         }
 
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
 
         .chart-container {
             position: relative;
             width: 100%;
             max-width: 100%;
-            height: 350px;
+            height: 380px;
         }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; }
+        /* Clean Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        .citation {
-            font-size: 0.75rem;
-            color: #64748b;
-            vertical-align: super;
-            margin-left: 2px;
-            text-decoration: none;
-        }
-        .citation:hover { color: #1e3a8a; text-decoration: underline; }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-brand-accent2 selection:text-white relative overflow-x-hidden">
+<body class="font-sans antialiased selection:bg-brand-blue selection:text-white relative overflow-x-hidden">
 
     <!-- Sticky Navigation -->
-    <nav class="fixed w-full z-50 glass-panel border-b border-brand-200 top-0 transition-all">
+    <nav class="fixed w-full z-50 glass-nav top-0 transition-all shadow-sm">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-brand-900 flex items-center justify-center text-white font-bold text-sm tracking-widest">DBC</div>
-                    <span class="font-bold text-lg tracking-tight text-brand-900">Clinical Deployment Protocol</span>
+                    <div class="w-8 h-8 bg-brand-navy flex items-center justify-center text-white font-bold text-sm tracking-widest rounded shadow-sm">DBC</div>
+                    <span class="font-bold text-lg tracking-tight text-brand-navy hidden sm:block">Clinical Deployment</span>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#problem" class="text-xs font-bold uppercase tracking-wider text-brand-600 hover:text-brand-900">Systemic Failure</a>
-                    <a href="#science" class="text-xs font-bold uppercase tracking-wider text-brand-600 hover:text-brand-900">Neurobiology</a>
-                    <a href="#interventions" class="text-xs font-bold uppercase tracking-wider text-brand-600 hover:text-brand-900">Code Application</a>
-                    <a href="#pathway" class="text-xs font-bold uppercase tracking-wider text-brand-600 hover:text-brand-900">Recovery Pathway</a>
-                    <a href="#data" class="text-xs font-bold uppercase tracking-wider text-brand-600 hover:text-brand-900">Efficacy Data</a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#problem" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">The Gap</a>
+                    <a href="#science" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Neurobiology</a>
+                    <a href="#audit" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Assessment</a>
+                    <a href="#interventions" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Codes</a>
+                    <a href="#pathway" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Pathway</a>
+                    <a href="#data" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">ROI Data</a>
                 </div>
             </div>
         </div>
@@ -121,241 +107,336 @@
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 px-6 bg-white overflow-hidden">
         <div class="ambient-grid"></div>
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-red-50 border border-red-100 mb-8">
-                <span class="w-2 h-2 rounded-full bg-brand-danger animate-pulse"></span>
-                <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-danger">Active Clinical Problem</span>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-200 mb-8 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
+                <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-600">Medical-Grade Environmental Modification</span>
             </div>
             
-            <h1 class="text-4xl lg:text-6xl font-black text-brand-900 tracking-tighter mb-6 leading-[1.1]">
-                Clinical Efficacy Does Not Survive <br/>
-                <span class="text-brand-accent2">Uncalibrated Architecture.</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-navy tracking-tighter mb-6 leading-[1.1]">
+                Clinical Efficacy Does Not Survive <br class="hidden md:block"/>
+                <span class="text-brand-blue">Uncalibrated Architecture.</span>
             </h1>
             
-            <p class="text-lg text-brand-700 max-w-3xl mx-auto mb-10 leading-relaxed font-serif">
-                The built environment exerts continuous, measurable influences on physiological states. Discharging patients into structurally deficient homes triggers severe neurovisceral dysregulation, artificially driving India's readmission crisis. We arrest this through codified, medical-grade architectural interventions.
+            <p class="text-lg text-brand-600 mx-auto mb-12 leading-relaxed font-serif">
+                The built environment exerts continuous, measurable influences on physiological states. Discharging patients into structurally deficient homes triggers severe neurovisceral dysregulation, artificially driving India's readmission crisis. We arrest this through codified architectural interventions.
             </p>
             
-            <!-- Partnership Logo -->
-            <div class="mt-12 pt-8 border-t border-brand-200/60 max-w-xl mx-auto flex flex-col items-center">
+            <!-- Partnership Logo (Text Box) -->
+            <div class="mt-8 pt-8 border-t border-brand-100 max-w-sm mx-auto flex flex-col items-center">
                 <p class="text-[10px] font-bold tracking-widest uppercase text-brand-400 mb-4">Research & Validation Partner</p>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Mayo_Clinic_logo.svg/800px-Mayo_Clinic_logo.svg.png" 
-                     alt="Mayo Clinic" 
-                     class="h-10 md:h-12 object-contain opacity-80 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-300">
+                <div class="px-8 py-4 bg-brand-50 border border-brand-200 rounded-xl shadow-sm hover:border-brand-blue hover:shadow-md transition-all cursor-default text-center w-full">
+                    <span class="text-xl md:text-2xl font-black text-brand-navy tracking-widest uppercase">Mayo Clinic</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- SECTION 1: Hard Facts & The Systemic Gap -->
-    <section id="problem" class="py-20 px-6 bg-brand-50 border-y border-brand-200">
+    <section id="problem" class="py-20 px-6 bg-brand-navy border-y border-brand-800 text-white relative">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-12 border-l-4 border-brand-danger pl-6">
-                <h2 class="text-3xl font-black tracking-tight mb-2 text-brand-900">The Structural Readmission Driver</h2>
-                <p class="text-brand-700 font-serif max-w-3xl">Cellular repair is biologically impossible in a state of autonomic arousal. The architectural failure of the post-acute environment directly reverses clinical interventions.</p>
+            <div class="mb-12 border-l-4 border-brand-accent pl-6">
+                <h2 class="text-3xl font-black tracking-tight mb-3 text-white">The Structural Readmission Driver</h2>
+                <p class="text-brand-300 font-serif max-w-3xl text-lg">Cellular repair is biologically impossible in a state of autonomic arousal. The architectural failure of the post-acute environment directly reverses clinical interventions.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Fact 1 -->
-                <div class="bg-white p-8 border border-brand-200">
-                    <div class="text-5xl font-black text-brand-900 mb-4 tracking-tighter">1.3<span class="text-xl text-brand-500 font-bold">/1000</span></div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-900 mb-2">WHO Bed Density Deficit</h3>
-                    <p class="text-brand-600 text-sm font-serif leading-relaxed">
-                        India’s severe bed deficit forces highly accelerated patient discharges. The home environment effectively becomes the de facto recovery ward, completely lacking the environmental controls of Evidence-Based Healthcare Design<a href="#ref" class="citation">[Ulrich, 2008]</a>.
+                <div class="bg-brand-800/50 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-colors">
+                    <div class="text-5xl font-black text-white mb-4 tracking-tighter">1.3<span class="text-xl text-brand-400 font-bold">/1000</span></div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-accent mb-3">WHO Bed Density Deficit</h3>
+                    <p class="text-brand-300 text-sm font-serif leading-relaxed">
+                        India’s severe bed deficit forces highly accelerated patient discharges. The home effectively becomes the recovery ward, completely lacking the environmental controls of Evidence-Based Healthcare Design [Ulrich, 2008].
                     </p>
                 </div>
 
                 <!-- Fact 2 -->
-                <div class="bg-white p-8 border border-brand-200">
-                    <div class="text-5xl font-black text-brand-danger mb-4 tracking-tighter">>70<span class="text-xl text-brand-500 font-bold">dB</span></div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-900 mb-2">Sensory Overload Baseline</h3>
-                    <p class="text-brand-600 text-sm font-serif leading-relaxed">
-                        Dense urban Indian dwellings subject recovering patients to continuous acoustic shock and stark lux gradients. This uncalibrated sensory load forces the amygdala into a chronic state of vigilance, elevating cortisol.
+                <div class="bg-brand-800/50 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-colors">
+                    <div class="text-5xl font-black text-white mb-4 tracking-tighter">>70<span class="text-xl text-brand-400 font-bold">dB</span></div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-accent mb-3">Sensory Overload Baseline</h3>
+                    <p class="text-brand-300 text-sm font-serif leading-relaxed">
+                        Dense urban Indian dwellings subject patients to continuous acoustic shock and stark lux gradients. This uncalibrated sensory load forces the amygdala into a chronic state of vigilance, elevating cortisol and arresting healing.
                     </p>
                 </div>
 
                 <!-- Fact 3 -->
-                <div class="bg-white p-8 border border-brand-200">
-                    <div class="text-5xl font-black text-brand-900 mb-4 tracking-tighter">~22<span class="text-xl text-brand-500 font-bold">%</span></div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-900 mb-2">30-Day Readmission Tax</h3>
-                    <p class="text-brand-600 text-sm font-serif leading-relaxed">
-                        While initiatives like Ayushman Bharat (PM-JAY) fund primary interventions, post-discharge environments remain an unmonitored blind spot. Preventable readmissions cost the system billions, driven by architectural, not pathological, failure.
+                <div class="bg-brand-800/50 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-colors">
+                    <div class="text-5xl font-black text-white mb-4 tracking-tighter">~22<span class="text-xl text-brand-400 font-bold">%</span></div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-accent mb-3">30-Day Readmission Tax</h3>
+                    <p class="text-brand-300 text-sm font-serif leading-relaxed">
+                        While GoI initiatives like PM-JAY fund primary interventions, post-discharge homes remain an unmonitored blind spot. Preventable readmissions cost the system billions, driven by architectural—not pathological—failure.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: The Science (Direct from PDF) -->
-    <section id="science" class="py-24 px-6 bg-white relative">
+    <!-- SECTION 2: The Science -->
+    <section id="science" class="py-24 px-6 bg-brand-50 relative">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col lg:flex-row gap-16">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
                 
                 <!-- Left: Academic Text -->
                 <div class="lg:w-1/2">
                     <h2 class="text-xs font-bold tracking-[0.2em] uppercase text-brand-500 mb-4">Original Research Abstract</h2>
-                    <h3 class="text-3xl font-black text-brand-900 tracking-tight mb-8">Design Behaviour Codes (DBC)<br/>Methodology</h3>
+                    <h3 class="text-3xl lg:text-4xl font-black text-brand-navy tracking-tight mb-8">Design Behaviour Codes (DBC) Methodology</h3>
                     
-                    <div class="font-serif text-brand-800 leading-relaxed space-y-6">
+                    <div class="font-serif text-brand-700 leading-relaxed space-y-6">
                         <p>
-                            DBCs constitute a systematic, codified methodology operationalised through a defined set of 200+ architectural codes. Each code translates evidence from cognitive science and environmental psychology into repeatable, auditable design conditions.
+                            DBCs constitute a systematic, codified methodology operationalised through a defined set of 200+ architectural codes. Each code translates evidence from cognitive science and environmental psychology into repeatable design conditions.
                         </p>
-                        <p class="pl-4 border-l-2 border-brand-300 text-brand-600">
+                        <div class="p-6 bg-white border-l-4 border-brand-blue shadow-sm rounded-r-lg text-brand-800">
                             "Unlike aesthetic conventions, each DBC specifies a minimum spatial expression and guardrail condition... measurable architectural characteristics that predictably modulate neurobiological processes."
-                        </p>
+                        </div>
                         <p>
-                            <strong class="font-sans text-brand-900">The Two-Brain Logic:</strong> Central to the framework is operationally embedding the dual-process model of human cognition<a href="#ref" class="citation">[Strack & Deutsch, 2004]</a> into architectural design. The objective is to ensure that the slow, deliberative cognitive system (required for physiological rest and cellular repair) is not overridden by fast, reactive processing caused by environmental stressors.
+                            <strong class="font-sans text-brand-navy">The Two-Brain Logic:</strong> Central to the framework is embedding the dual-process model of human cognition [Strack & Deutsch, 2004] into architectural design. The objective is to ensure that the slow, deliberative cognitive system (required for cellular repair) is not overridden by fast, reactive processing caused by environmental stressors.
                         </p>
                     </div>
                 </div>
 
                 <!-- Right: Neurovisceral Interactive Model -->
-                <div class="lg:w-1/2 bg-brand-900 text-white p-8 md:p-10 shadow-xl">
-                    <h4 class="text-sm font-bold uppercase tracking-widest text-brand-400 mb-6 border-b border-brand-700 pb-4">Neurovisceral Integration Model</h4>
-                    
-                    <div class="flex gap-2 mb-8 bg-brand-800 p-1 rounded">
-                        <button onclick="toggleBrain('sys1')" id="btn-sys1" class="flex-1 py-2 text-xs font-bold uppercase tracking-wider bg-brand-danger text-white transition-all">
-                            System 1 Override (Unmanaged)
-                        </button>
-                        <button onclick="toggleBrain('sys2')" id="btn-sys2" class="flex-1 py-2 text-xs font-bold uppercase tracking-wider text-brand-400 hover:text-white transition-all">
-                            System 2 Recovery (DBC Audited)
-                        </button>
-                    </div>
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-brand-200">
+                        <h4 class="text-sm font-bold uppercase tracking-widest text-brand-navy mb-6 border-b border-brand-100 pb-4 flex justify-between items-center">
+                            <span>Neurovisceral Integration Model</span>
+                            <span class="text-[10px] text-brand-400 font-mono bg-brand-50 px-2 py-1 rounded">Interactive</span>
+                        </h4>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3 mb-8">
+                            <button onclick="toggleBrain('sys1')" id="btn-sys1" class="flex-1 py-3 px-4 text-xs font-bold uppercase tracking-wider border-2 border-brand-alert text-brand-alert hover:bg-brand-alert hover:text-white rounded-lg transition-all">
+                                System 1 Override
+                            </button>
+                            <button onclick="toggleBrain('sys2')" id="btn-sys2" class="flex-1 py-3 px-4 text-xs font-bold uppercase tracking-wider border-2 border-brand-blue bg-brand-blue text-white rounded-lg transition-all">
+                                System 2 Recovery
+                            </button>
+                        </div>
 
-                    <div id="brain-data" class="space-y-6 transition-all duration-300">
-                        <div>
-                            <span class="text-brand-danger font-bold text-sm block mb-1">Environmental Input</span>
-                            <p class="font-serif text-brand-200 text-sm">High-decibel infiltration, stark threshold gradients, continuous spatial friction demanding micro-decisions.</p>
-                        </div>
-                        <div>
-                            <span class="text-brand-danger font-bold text-sm block mb-1">Neurological Response</span>
-                            <p class="font-serif text-brand-200 text-sm">Amygdala activation triggers hypothalamic-pituitary-adrenal (HPA) axis. Cognitive bandwidth hijacked for survival processing.</p>
-                        </div>
-                        <div class="bg-brand-800 p-4 border-l-4 border-brand-danger">
-                            <span class="text-brand-400 text-xs font-bold uppercase block mb-1">Physiological Outcome [Thayer & Lane, 2000]</span>
-                            <p class="font-mono text-sm text-white">Elevated Cortisol. Depressed HRV. Arrested Tissue Repair.</p>
+                        <div id="brain-data" class="space-y-6 transition-opacity duration-300 min-h-[220px]">
+                            <!-- Content injected via JS -->
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2.5: DBC Home Health Audit - Assessment -->
+    <section id="audit" class="py-24 px-6 bg-brand-navy border-t border-brand-800 text-white relative overflow-hidden">
+        <!-- Abstract background elements -->
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-blue opacity-5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="mb-16 md:mb-20">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-brand-800 border border-brand-700 mb-6">
+                    <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-accent">Pre-Intervention Phase</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-6 text-white">DBC Home Health Audit</h2>
+                <p class="text-brand-300 font-serif max-w-4xl text-lg leading-relaxed">
+                    Before executing any architectural intervention, certified DBC auditors conduct a rigorous, data-driven spatial assessment. Using calibrated environmental sensors, we quantify the precise neurobiological tax the residence is inflicting on the recovering patient.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left: Assessment Protocol -->
+                <div class="lg:col-span-6 space-y-8">
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 rounded-xl bg-brand-800 flex items-center justify-center text-brand-accent font-black text-xl flex-shrink-0 shadow-sm border border-brand-700">1</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2 text-white">EHR Vulnerability Sync</h4>
+                            <p class="text-brand-300 font-serif text-sm leading-relaxed">The audit team cross-references the patient's Electronic Health Record (EHR). We map specific clinical vulnerabilities (e.g., cardiac instability) to their corresponding environmental stressors (e.g., acoustic shock).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 rounded-xl bg-brand-800 flex items-center justify-center text-brand-accent font-black text-xl flex-shrink-0 shadow-sm border border-brand-700">2</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2 text-white">IoT Sensory Mapping</h4>
+                            <p class="text-brand-300 font-serif text-sm leading-relaxed">Auditors deploy decibel meters and lux sensors across the primary recovery zones. We map baseline infiltration rates to identify the exact thresholds triggering autonomic arousal.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-6 items-start">
+                        <div class="w-12 h-12 rounded-xl bg-brand-800 flex items-center justify-center text-brand-accent font-black text-xl flex-shrink-0 shadow-sm border border-brand-700">3</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2 text-white">Spatial Friction Auditing</h4>
+                            <p class="text-brand-300 font-serif text-sm leading-relaxed">A physical assessment of circulation routes, identifying trip hazards, 'pinch points', and abrupt transition zones that impose a continuous System 1 cognitive tax on the patient.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Diagnostic UI Panel -->
+                <div class="lg:col-span-6">
+                    <div class="bg-brand-900 border border-brand-700 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+                        <!-- UI Header -->
+                        <div class="flex justify-between items-center border-b border-brand-800 pb-4 mb-6">
+                            <span class="font-mono text-brand-accent text-xs tracking-widest uppercase">Live Diagnostic Readout</span>
+                            <span class="flex h-3 w-3 relative">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-alert opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-alert"></span>
+                            </span>
+                        </div>
+
+                        <!-- Metric 1 -->
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="font-bold text-white">Ambient Acoustic Load</span>
+                                <span class="text-brand-alert font-mono font-bold">78 dB (Critical)</span>
+                            </div>
+                            <div class="w-full bg-brand-800 rounded-full h-2.5 mb-2 relative overflow-hidden">
+                                <div class="bg-brand-alert h-2.5 rounded-full" style="width: 85%"></div>
+                                <!-- Target Line -->
+                                <div class="absolute top-0 bottom-0 left-[45%] w-0.5 bg-brand-accent z-10"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-brand-400">
+                                <span>DBC Target: &lt;45 dB</span>
+                                <span>Result: Amygdala Override</span>
+                            </div>
+                        </div>
+
+                        <!-- Metric 2 -->
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="font-bold text-white">Circadian Lux Volatility</span>
+                                <span class="text-brand-alert font-mono font-bold">Severe</span>
+                            </div>
+                            <div class="w-full bg-brand-800 rounded-full h-2.5 mb-2 relative overflow-hidden">
+                                <div class="bg-brand-alert h-2.5 rounded-full" style="width: 70%"></div>
+                                <!-- Target Line -->
+                                <div class="absolute top-0 bottom-0 left-[20%] w-0.5 bg-brand-accent z-10"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-brand-400">
+                                <span>DBC Target: Gradual Transitions</span>
+                                <span>Result: Pupillary Shock</span>
+                            </div>
+                        </div>
+
+                        <!-- Metric 3 -->
+                        <div class="mb-2">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="font-bold text-white">Spatial Friction Index</span>
+                                <span class="text-brand-alert font-mono font-bold">High Density</span>
+                            </div>
+                            <div class="w-full bg-brand-800 rounded-full h-2.5 mb-2 relative overflow-hidden">
+                                <div class="bg-brand-alert h-2.5 rounded-full" style="width: 90%"></div>
+                                <!-- Target Line -->
+                                <div class="absolute top-0 bottom-0 left-[10%] w-0.5 bg-brand-accent z-10"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-brand-400">
+                                <span>DBC Target: Zero Bottlenecks</span>
+                                <span>Result: System 1 Tax</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-brand-800 text-center">
+                            <button class="w-full py-3 bg-brand-alert text-white text-xs font-bold uppercase tracking-widest rounded shadow-md hover:bg-red-800 transition-colors">
+                                Trigger Intervention Protocol
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- SECTION 3: Code Application (Interventions) -->
-    <section id="interventions" class="py-24 px-6 bg-brand-50 border-t border-brand-200">
+    <section id="interventions" class="py-24 px-6 bg-white border-t border-brand-200">
         <div class="max-w-7xl mx-auto">
             <div class="mb-12">
-                <h2 class="text-3xl font-black tracking-tight mb-2 text-brand-900">Physical Application of DBCs</h2>
-                <p class="text-brand-700 font-serif max-w-3xl">Not interior decoration. We execute rapid, medical-grade architectural interventions governed by strict, measurable guardrails to down-regulate the autonomic nervous system.</p>
+                <h2 class="text-3xl font-black tracking-tight mb-2 text-brand-navy">Physical Application of DBCs</h2>
+                <p class="text-brand-600 font-serif max-w-3xl">Not interior decoration. We execute rapid, medical-grade architectural interventions governed by strict, measurable guardrails to down-regulate the autonomic nervous system.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Code 1 -->
-                <div class="bg-white border border-brand-300 p-8 shadow-sm relative group">
-                    <div class="absolute top-0 right-0 bg-brand-900 text-white text-xs font-mono px-3 py-1 font-bold">DBC-S14</div>
-                    <h3 class="text-xl font-bold mb-4 text-brand-900 mt-2">Sensory Load Calibration</h3>
+                <div class="bg-brand-50 border border-brand-200 p-8 rounded-2xl relative group hover:shadow-md transition-shadow">
+                    <div class="inline-block bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded mb-4">DBC-S14</div>
+                    <h3 class="text-xl font-bold mb-4 text-brand-navy">Sensory Calibration</h3>
                     <div class="space-y-4 font-serif text-sm text-brand-700">
-                        <p><strong class="font-sans text-brand-900">Target Mechanism:</strong> Mitigation of auditory/visual shock causing autonomic arousal.</p>
-                        <p><strong class="font-sans text-brand-900">Physical Intervention:</strong> Application of targeted acoustic sealing to primary external apertures. Eradication of >4000K LED flicker. Installation of 2700K circadian-aligned dimmable luminaires in the primary rest zone.</p>
-                        <div class="bg-brand-50 p-3 font-mono text-xs border-l-2 border-brand-accent2 text-brand-800">
-                            Metrics: Ambient dB reduction to < 45dB. Glare elimination.
-                        </div>
+                        <p><strong class="font-sans text-brand-navy">Target Mechanism:</strong> Mitigation of auditory/visual shock causing autonomic arousal.</p>
+                        <p><strong class="font-sans text-brand-navy">Physical Intervention:</strong> Targeted acoustic sealing to primary external apertures. Eradication of >4000K LED flicker. Installation of 2700K circadian-aligned dimmable luminaires in the rest zone.</p>
                     </div>
                 </div>
 
                 <!-- Code 2 -->
-                <div class="bg-white border border-brand-300 p-8 shadow-sm relative group">
-                    <div class="absolute top-0 right-0 bg-brand-900 text-white text-xs font-mono px-3 py-1 font-bold">DBC-T02</div>
-                    <h3 class="text-xl font-bold mb-4 text-brand-900 mt-2">Threshold Gradients</h3>
+                <div class="bg-brand-50 border border-brand-200 p-8 rounded-2xl relative group hover:shadow-md transition-shadow">
+                    <div class="inline-block bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded mb-4">DBC-T02</div>
+                    <h3 class="text-xl font-bold mb-4 text-brand-navy">Threshold Gradients</h3>
                     <div class="space-y-4 font-serif text-sm text-brand-700">
-                        <p><strong class="font-sans text-brand-900">Target Mechanism:</strong> Prevention of physiological shock to pupillary and nervous systems upon zone transition.</p>
-                        <p><strong class="font-sans text-brand-900">Physical Intervention:</strong> Erection of rapid-deploy semi-permeable spatial screens. Establishing calculated 'buffer zones' to force physical pacing. Stepping down lux levels between entryways and recovery areas.</p>
-                        <div class="bg-brand-50 p-3 font-mono text-xs border-l-2 border-brand-accent2 text-brand-800">
-                            Metrics: Gradual pupillary adaptation. Elimination of startle reflex.
-                        </div>
+                        <p><strong class="font-sans text-brand-navy">Target Mechanism:</strong> Prevention of physiological shock to pupillary and nervous systems upon zone transition.</p>
+                        <p><strong class="font-sans text-brand-navy">Physical Intervention:</strong> Erection of rapid-deploy semi-permeable spatial screens. Establishing 'buffer zones' to force physical pacing. Stepping down lux levels between entryways and beds.</p>
                     </div>
                 </div>
 
                 <!-- Code 3 -->
-                <div class="bg-white border border-brand-300 p-8 shadow-sm relative group">
-                    <div class="absolute top-0 right-0 bg-brand-900 text-white text-xs font-mono px-3 py-1 font-bold">DBC-C09</div>
-                    <h3 class="text-xl font-bold mb-4 text-brand-900 mt-2">Circulation Continuity</h3>
+                <div class="bg-brand-50 border border-brand-200 p-8 rounded-2xl relative group hover:shadow-md transition-shadow">
+                    <div class="inline-block bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded mb-4">DBC-C09</div>
+                    <h3 class="text-xl font-bold mb-4 text-brand-navy">Circulation Continuity</h3>
                     <div class="space-y-4 font-serif text-sm text-brand-700">
-                        <p><strong class="font-sans text-brand-900">Target Mechanism:</strong> Removal of spatial friction demanding continuous micro-decisions (System 1 cognitive tax).</p>
-                        <p><strong class="font-sans text-brand-900">Physical Intervention:</strong> Re-routing of primary furniture massing based on patient mobility vectors. Removal of floor-level friction points. Implementation of visual 'Rhythmic Structural Repetition' to signal clear, safe pathways.</p>
-                        <div class="bg-brand-50 p-3 font-mono text-xs border-l-2 border-brand-accent2 text-brand-800">
-                            Metrics: Navigational friction reduced. Fall risk minimized.
-                        </div>
+                        <p><strong class="font-sans text-brand-navy">Target Mechanism:</strong> Removal of spatial friction demanding continuous micro-decisions (System 1 cognitive tax).</p>
+                        <p><strong class="font-sans text-brand-navy">Physical Intervention:</strong> Re-routing of primary furniture massing based on patient mobility vectors. Removal of floor friction points. Implementation of visual 'Rhythmic Structural Repetition'.</p>
                     </div>
                 </div>
-
-                <!-- Protocol CTA -->
-                <div class="bg-brand-900 text-white p-8 flex flex-col justify-center items-start">
-                    <h3 class="text-xl font-bold mb-2">48-Hour Deployment Protocol</h3>
-                    <p class="font-serif text-sm text-brand-300 mb-6">Our interventions are executed by certified DBC auditors within the critical window immediately following hospital discharge, verified via IoT and EHR data.</p>
-                    <ul class="text-xs font-mono text-brand-400 space-y-2 mb-6">
-                        <li>[T-24h] Prescription & Sensitivity Mapping</li>
-                        <li>[T+02h] On-Site Spatial Audit via IoT</li>
-                        <li>[T+06h] Code-Compliant Interventions Applied</li>
-                        <li>[Ongoing] Biometric Efficacy Tracking (HRV Sync)</li>
-                    </ul>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3.5: Recovery Pathway (The "Steps to Health" Tabs) -->
-    <section id="pathway" class="py-24 px-6 bg-brand-900 text-white relative border-t border-brand-800">
+    <!-- SECTION 4: Recovery Pathway (VERTICAL TABS - BULLETPROOF) -->
+    <section id="pathway" class="py-24 px-6 bg-brand-navy text-white relative">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-12 border-l-4 border-brand-accent1 pl-6">
+            <div class="mb-12 border-l-4 border-brand-accent pl-6">
                 <h2 class="text-3xl font-black tracking-tight mb-2 text-white">Neurovisceral Recovery Pathway</h2>
-                <p class="text-brand-300 font-serif max-w-3xl">The chronological physiological cascade following a DBC architectural intervention. Tracing the biological shift from autonomic arousal to deep cellular repair.</p>
+                <p class="text-brand-300 font-serif max-w-3xl text-lg">The chronological physiological cascade following a DBC architectural intervention. Tracing the biological shift from autonomic arousal to deep cellular repair.</p>
             </div>
 
-            <!-- Interactive Tab Container -->
-            <div class="bg-brand-800 border border-brand-700 shadow-xl">
-                <!-- Tab Headers -->
-                <div class="flex flex-col sm:flex-row border-b border-brand-700 bg-brand-900">
-                    <button onclick="switchPathway('phase1')" id="tab-phase1" class="flex-1 py-4 px-6 text-left sm:text-center text-sm font-bold uppercase tracking-wider text-brand-900 bg-brand-accent1 transition-all">
-                        Phase 1: Arrest<br/><span class="text-xs font-mono opacity-80 mt-1 block">T+24 Hours</span>
+            <!-- Bulletproof Dashboard Layout (Vertical tabs on desktop, stack on mobile) -->
+            <div class="flex flex-col md:flex-row gap-8 bg-brand-800/40 border border-brand-700 rounded-2xl p-4 md:p-8">
+                
+                <!-- Tab Menu (Left side) -->
+                <div class="flex flex-col gap-2 md:w-1/3 lg:w-1/4">
+                    <button onclick="switchPathway('phase1')" id="tab-phase1" class="text-left px-6 py-4 rounded-xl transition-all border border-transparent bg-brand-blue text-white shadow-md">
+                        <span class="font-bold uppercase tracking-wider block text-sm">Phase 1: Arrest</span>
+                        <span class="text-xs font-mono opacity-80 mt-1 block">T+24 Hours</span>
                     </button>
-                    <button onclick="switchPathway('phase2')" id="tab-phase2" class="flex-1 py-4 px-6 text-left sm:text-center text-sm font-bold uppercase tracking-wider text-brand-400 hover:text-brand-100 transition-all border-l border-brand-700">
-                        Phase 2: Regulation<br/><span class="text-xs font-mono opacity-60 mt-1 block">Days 3 - 7</span>
+                    <button onclick="switchPathway('phase2')" id="tab-phase2" class="text-left px-6 py-4 rounded-xl transition-all border border-brand-700 text-brand-300 hover:bg-brand-800 hover:text-white">
+                        <span class="font-bold uppercase tracking-wider block text-sm">Phase 2: Regulation</span>
+                        <span class="text-xs font-mono opacity-60 mt-1 block">Days 3 - 7</span>
                     </button>
-                    <button onclick="switchPathway('phase3')" id="tab-phase3" class="flex-1 py-4 px-6 text-left sm:text-center text-sm font-bold uppercase tracking-wider text-brand-400 hover:text-brand-100 transition-all border-l border-brand-700">
-                        Phase 3: Integration<br/><span class="text-xs font-mono opacity-60 mt-1 block">Days 8 - 14</span>
+                    <button onclick="switchPathway('phase3')" id="tab-phase3" class="text-left px-6 py-4 rounded-xl transition-all border border-brand-700 text-brand-300 hover:bg-brand-800 hover:text-white">
+                        <span class="font-bold uppercase tracking-wider block text-sm">Phase 3: Integration</span>
+                        <span class="text-xs font-mono opacity-60 mt-1 block">Days 8 - 14</span>
                     </button>
-                    <button onclick="switchPathway('phase4')" id="tab-phase4" class="flex-1 py-4 px-6 text-left sm:text-center text-sm font-bold uppercase tracking-wider text-brand-400 hover:text-brand-100 transition-all border-l border-brand-700">
-                        Phase 4: Consolidation<br/><span class="text-xs font-mono opacity-60 mt-1 block">Day 30+</span>
+                    <button onclick="switchPathway('phase4')" id="tab-phase4" class="text-left px-6 py-4 rounded-xl transition-all border border-brand-700 text-brand-300 hover:bg-brand-800 hover:text-white">
+                        <span class="font-bold uppercase tracking-wider block text-sm">Phase 4: Shield</span>
+                        <span class="text-xs font-mono opacity-60 mt-1 block">Day 30+</span>
                     </button>
                 </div>
 
-                <!-- Tab Content -->
-                <div class="p-8 md:p-12 min-h-[320px] flex items-center bg-gradient-to-br from-brand-800 to-brand-900">
-                    <div id="pathway-content" class="w-full transition-opacity duration-300">
+                <!-- Tab Content (Right side) -->
+                <div class="md:w-2/3 lg:w-3/4 bg-brand-900 rounded-2xl border border-brand-700 p-6 md:p-10 flex flex-col justify-center min-h-[350px]">
+                    <div id="pathway-content" class="transition-opacity duration-300">
                         <!-- Content injected via JS -->
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- SECTION 4: Efficacy Data / ROI -->
-    <section id="data" class="py-24 px-6 bg-white border-t border-brand-200">
+    <!-- SECTION 5: Efficacy Data / ROI -->
+    <section id="data" class="py-24 px-6 bg-brand-50 border-t border-brand-200">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                <div class="max-w-2xl border-l-4 border-brand-accent2 pl-6">
-                    <h2 class="text-3xl font-black tracking-tight mb-2 text-brand-900">Projected Efficacy Data</h2>
-                    <p class="text-brand-700 font-serif">Theoretical modeling applying Ulrich's Evidence-Based Healthcare outcomes to the post-acute residential intervention protocol.</p>
-                </div>
+            <div class="mb-12 border-l-4 border-brand-blue pl-6">
+                <h2 class="text-3xl font-black tracking-tight mb-2 text-brand-navy">Projected Efficacy Data</h2>
+                <p class="text-brand-600 font-serif max-w-3xl">Theoretical modeling applying Ulrich's Evidence-Based Healthcare outcomes to the post-acute residential intervention protocol.</p>
             </div>
 
-            <div class="bg-white border border-brand-200 p-8 shadow-sm">
+            <div class="bg-white border border-brand-200 p-6 md:p-10 shadow-lg rounded-2xl">
                 <div class="chart-container">
                     <canvas id="clinicalDataChart"></canvas>
                 </div>
-                <div class="mt-8 pt-4 border-t border-brand-100 text-center text-xs font-mono text-brand-500">
+                <div class="mt-8 pt-4 border-t border-brand-100 text-center text-xs font-mono text-brand-400">
                     NOTE: Data represents comparative physiological and operational markers. [Standard Discharge vs. DBC Audited Intervention].
                 </div>
             </div>
@@ -363,33 +444,40 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-brand-900 py-10 border-t border-brand-800 text-brand-400">
+    <footer class="bg-brand-navy py-10 border-t border-brand-800 text-brand-400">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="font-bold text-white tracking-widest text-sm">DBC CLINICAL</div>
-            <p class="text-xs font-serif">Integrating Cognitive Science into Architectural Practice.</p>
+            <div class="font-bold text-white tracking-widest text-sm flex items-center gap-2">
+                <div class="w-6 h-6 bg-white text-brand-navy flex items-center justify-center rounded text-xs">D</div>
+                DBC CLINICAL
+            </div>
+            <p class="text-xs font-serif text-center">Integrating Cognitive Science into Architectural Practice.</p>
             <p class="text-xs font-mono">CONFIDENTIAL &copy; 2026</p>
         </div>
     </footer>
 
-    <!-- Logic -->
+    <!-- Javascript Logic -->
     <script>
         // --- 1. Neurovisceral Toggle Logic ---
         const brainData = {
             sys1: {
-                btn1: "bg-brand-danger text-white", btn2: "text-brand-400 hover:text-white",
+                btn1: "bg-brand-alert text-white border-brand-alert", 
+                btn2: "bg-transparent text-brand-500 border-brand-200 hover:border-brand-blue hover:text-brand-blue",
                 env: "High-decibel infiltration, stark threshold gradients, continuous spatial friction demanding micro-decisions.",
                 neuro: "Amygdala activation triggers hypothalamic-pituitary-adrenal (HPA) axis. Cognitive bandwidth hijacked for survival processing.",
                 physio: "Elevated Cortisol. Depressed HRV. Arrested Tissue Repair.",
-                border: "border-brand-danger",
-                labelColor: "text-brand-danger"
+                accentClass: "text-brand-alert",
+                borderClass: "border-brand-alert",
+                bgClass: "bg-red-50"
             },
             sys2: {
-                btn1: "text-brand-400 hover:text-white", btn2: "bg-brand-accent1 text-brand-900",
+                btn1: "bg-transparent text-brand-500 border-brand-200 hover:border-brand-alert hover:text-brand-alert", 
+                btn2: "bg-brand-blue text-white border-brand-blue",
                 env: "Acoustically sealed, lux gradients buffered, rhythmic structural cues present. Environment calibrated to DBC guardrails.",
                 neuro: "Perception of environmental safety down-regulates amygdala. Deliberative cognitive processing (System 2) resumes dominance.",
                 physio: "Parasympathetic Dominance. Elevated HRV. Accelerated Cellular Repair.",
-                border: "border-brand-accent1",
-                labelColor: "text-brand-accent1"
+                accentClass: "text-brand-blue",
+                borderClass: "border-brand-blue",
+                bgClass: "bg-blue-50"
             }
         };
 
@@ -397,39 +485,40 @@
             const btn1 = document.getElementById('btn-sys1');
             const btn2 = document.getElementById('btn-sys2');
             const container = document.getElementById('brain-data');
-            
             const data = brainData[state];
             
-            btn1.className = `flex-1 py-2 text-xs font-bold uppercase tracking-wider transition-all ${data.btn1}`;
-            btn2.className = `flex-1 py-2 text-xs font-bold uppercase tracking-wider transition-all ${data.btn2}`;
+            // Explicitly set exact classes to avoid conflicts
+            btn1.className = `flex-1 py-3 px-4 text-xs font-bold uppercase tracking-wider border-2 rounded-lg transition-all ${data.btn1}`;
+            btn2.className = `flex-1 py-3 px-4 text-xs font-bold uppercase tracking-wider border-2 rounded-lg transition-all ${data.btn2}`;
 
             container.style.opacity = '0';
             setTimeout(() => {
                 container.innerHTML = `
-                    <div>
-                        <span class="${data.labelColor} font-bold text-sm block mb-1">Environmental Input</span>
-                        <p class="font-serif text-brand-200 text-sm">${data.env}</p>
+                    <div class="mb-5">
+                        <span class="${data.accentClass} font-bold text-xs uppercase tracking-wider block mb-1">Environmental Input</span>
+                        <p class="font-serif text-brand-700 text-sm">${data.env}</p>
                     </div>
-                    <div>
-                        <span class="${data.labelColor} font-bold text-sm block mb-1">Neurological Response</span>
-                        <p class="font-serif text-brand-200 text-sm">${data.neuro}</p>
+                    <div class="mb-5">
+                        <span class="${data.accentClass} font-bold text-xs uppercase tracking-wider block mb-1">Neurological Response</span>
+                        <p class="font-serif text-brand-700 text-sm">${data.neuro}</p>
                     </div>
-                    <div class="bg-brand-800 p-4 border-l-4 ${data.border}">
-                        <span class="text-brand-400 text-xs font-bold uppercase block mb-1">Physiological Outcome [Thayer & Lane, 2000]</span>
-                        <p class="font-mono text-sm text-white">${data.physio}</p>
+                    <div class="p-4 border-l-4 rounded-r-lg ${data.borderClass} ${data.bgClass}">
+                        <span class="${data.accentClass} text-[10px] font-bold uppercase tracking-widest block mb-1">Physiological Outcome [Thayer & Lane, 2000]</span>
+                        <p class="font-mono text-sm text-brand-900 font-bold">${data.physio}</p>
                     </div>
                 `;
                 container.style.opacity = '1';
             }, 150);
         }
 
-        // --- 2. Pathway Tabs Logic ---
+
+        // --- 2. Vertical Dashboard Pathway Tabs Logic ---
         const pathwayData = {
             phase1: {
                 title: "Environmental Arrest & Threat Mitigation",
                 mechanism: "Immediate cessation of excessive sensory load (acoustic/lux) and physical friction. The architectural 'threat' signal to the amygdala is neutralized.",
                 physiological: "Cortisol spikes halt. The sympathetic nervous system (fight-or-flight) stops compounding the physiological tax on the recovering body.",
-                clinical: "Prevention of immediate post-discharge acute stress events. Patient reports reduction in environmental disorientation."
+                clinical: "Prevention of immediate post-discharge acute stress events. Patient reports rapid reduction in environmental disorientation."
             },
             phase2: {
                 title: "Autonomic Down-Regulation",
@@ -452,38 +541,38 @@
         };
 
         function switchPathway(phase) {
-            // Reset all tabs
+            // Reset all tabs to inactive state
             const tabs = ['phase1', 'phase2', 'phase3', 'phase4'];
             tabs.forEach(t => {
                 const el = document.getElementById(`tab-${t}`);
-                el.className = "flex-1 py-4 px-6 text-left sm:text-center text-sm font-bold uppercase tracking-wider text-brand-400 hover:text-brand-100 transition-all border-l border-brand-700 bg-transparent";
-                el.querySelector('span').className = "text-xs font-mono opacity-60 mt-1 block";
+                el.className = "text-left px-6 py-4 rounded-xl transition-all border border-brand-700 text-brand-300 hover:bg-brand-800 hover:text-white";
+                el.querySelector('span:last-child').className = "text-xs font-mono opacity-60 mt-1 block text-brand-400";
             });
 
-            // Activate selected tab
+            // Set active tab styling
             const activeEl = document.getElementById(`tab-${phase}`);
-            activeEl.className = "flex-1 py-4 px-6 text-left sm:text-center text-sm font-bold uppercase tracking-wider text-brand-900 bg-brand-accent1 transition-all";
-            activeEl.querySelector('span').className = "text-xs font-mono opacity-80 mt-1 block text-brand-900";
+            activeEl.className = "text-left px-6 py-4 rounded-xl transition-all border border-transparent bg-brand-blue text-white shadow-md";
+            activeEl.querySelector('span:last-child').className = "text-xs font-mono opacity-80 mt-1 block text-blue-200";
 
-            // Update content
+            // Update content safely
             const container = document.getElementById('pathway-content');
             const data = pathwayData[phase];
 
             container.style.opacity = '0';
             setTimeout(() => {
                 container.innerHTML = `
-                    <h3 class="text-2xl font-black mb-6 text-white">${data.title}</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <h3 class="text-2xl md:text-3xl font-black mb-8 text-white">${data.title}</h3>
+                    <div class="space-y-6">
                         <div>
-                            <span class="text-brand-accent1 text-xs font-bold uppercase tracking-widest block mb-2 border-b border-brand-700 pb-2">Architectural Mechanism</span>
+                            <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block mb-2 border-b border-brand-700 pb-1 w-max">Architectural Mechanism</span>
                             <p class="font-serif text-brand-200 text-sm leading-relaxed">${data.mechanism}</p>
                         </div>
                         <div>
-                            <span class="text-brand-400 text-xs font-bold uppercase tracking-widest block mb-2 border-b border-brand-700 pb-2">Physiological Shift</span>
+                            <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block mb-2 border-b border-brand-700 pb-1 w-max">Physiological Shift</span>
                             <p class="font-serif text-brand-200 text-sm leading-relaxed">${data.physiological}</p>
                         </div>
-                        <div class="bg-brand-900 p-5 border-l-2 border-brand-accent1">
-                            <span class="text-white text-xs font-bold uppercase tracking-widest block mb-2">Clinical Outcome</span>
+                        <div class="bg-brand-800/80 p-5 border-l-4 border-brand-blue rounded-r-lg mt-4">
+                            <span class="text-white text-[11px] font-bold uppercase tracking-widest block mb-2">Clinical Outcome</span>
                             <p class="font-mono text-brand-300 text-sm leading-relaxed">${data.clinical}</p>
                         </div>
                     </div>
@@ -492,37 +581,36 @@
             }, 200);
         }
 
-        // Initialize Phase 1
-        switchPathway('phase1');
-
 
         // --- 3. Chart.js (Clinical Presentation) ---
         document.addEventListener("DOMContentLoaded", function() {
             const ctx = document.getElementById('clinicalDataChart').getContext('2d');
             Chart.defaults.font.family = '"Plus Jakarta Sans", sans-serif';
-            Chart.defaults.color = '#475569';
+            Chart.defaults.color = '#64748b';
 
             new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: [
-                        'Cortisol Levels (Autonomic Stress)', 
-                        'Heart Rate Variability (Rest/Repair)', 
-                        'Probability of 30-Day Readmission', 
-                        'Reported Sleep Quality Index'
+                        'Cortisol Levels (Stress)', 
+                        'Heart Rate Variability (Repair)', 
+                        '30-Day Readmission Risk', 
+                        'Sleep Quality Index'
                     ],
                     datasets: [
                         {
                             label: 'Standard Uncalibrated Home',
                             data: [85, 20, 22, 35], 
-                            backgroundColor: '#94a3b8', // Neutral Slate
-                            barPercentage: 0.5, categoryPercentage: 0.8
+                            backgroundColor: '#94a3b8',
+                            barPercentage: 0.6, categoryPercentage: 0.7,
+                            borderRadius: 4
                         },
                         {
                             label: 'DBC Audited Environment',
                             data: [30, 75, 4, 82], 
-                            backgroundColor: '#1e3a8a', // Deep Medical Blue
-                            barPercentage: 0.5, categoryPercentage: 0.8
+                            backgroundColor: '#1d4ed8', // brand-blue
+                            barPercentage: 0.6, categoryPercentage: 0.7,
+                            borderRadius: 4
                         }
                     ]
                 },
@@ -531,19 +619,24 @@
                     maintainAspectRatio: false,
                     interaction: { mode: 'index', intersect: false },
                     plugins: {
-                        legend: { position: 'top', align: 'start', labels: { boxWidth: 12, font: { weight: 'bold' } } },
+                        legend: { 
+                            position: 'top', 
+                            align: 'center', 
+                            labels: { boxWidth: 12, padding: 20, font: { weight: 'bold' } } 
+                        },
                         tooltip: {
-                            backgroundColor: '#0f172a',
+                            backgroundColor: '#0a192f',
                             titleFont: { family: '"Plus Jakarta Sans"' },
                             bodyFont: { family: '"Plus Jakarta Sans"' },
-                            padding: 12, cornerRadius: 4,
+                            padding: 12, cornerRadius: 6,
                         }
                     },
                     scales: {
                         y: { 
                             beginAtZero: true, max: 100, 
-                            title: { display: true, text: 'Relative Physiological Scale (%)', font: { size: 10, weight: 'bold' } },
-                            border: { display: false }, grid: { color: '#e2e8f0' } 
+                            title: { display: true, text: 'Relative Physiological Scale (%)', font: { size: 11, weight: 'bold' }, padding: {bottom: 10} },
+                            border: { display: false }, grid: { color: '#e2e8f0', drawTicks: false },
+                            ticks: { padding: 10 }
                         },
                         x: { 
                             border: { display: false }, grid: { display: false }, 
@@ -552,6 +645,10 @@
                     }
                 }
             });
+
+            // Initialize views after DOM is ready
+            toggleBrain('sys2'); 
+            switchPathway('phase1');
         });
     </script>
 </body>

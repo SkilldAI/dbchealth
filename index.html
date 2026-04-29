@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBC HomeHealth: Strategic Service Model</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Modern Typography: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: Modern Health-Tech (Slate, Zinc, Cyan, Blue, Emerald) -->
+    <!-- Application Structure Plan: Feasibility Dashboard / Executive Briefing. Upgraded to a 'Bento Box' grid system for information density without cognitive overload. The flow remains: Core Problem -> DBC Science -> Service Operationalization -> Impact Projections. -->
+    <!-- Visualization & Content Choices: 
+         1. Bento Box Layout -> Goal: Organize -> Modern alternative to flat cards, grouping related info intuitively.
+         2. iOS-style Segmented Control (HTML/JS) -> Goal: Inform -> Replaces clunky buttons for the Two-Brain Logic toggle, providing a premium feel.
+         3. Dynamic Stepper (HTML/JS) -> Goal: Process Explanation -> A clean, state-driven workflow demonstrator.
+         4. Premium Chart.js implementation -> Goal: Compare -> Upgraded visual aesthetics (hidden grids, rounded bars, custom tooltips).
+         Library/Method: Tailwind CSS, Vanilla JS, Chart.js. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            accent1: '#0ea5e9', // Cyan
+                            accent2: '#2563eb', // Blue
+                            accent3: '#10b981'  // Emerald
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+                        'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc; /* brand-50 */
+            color: #0f172a; /* brand-900 */
+        }
+
+        /* Ambient Background Glows */
+        .ambient-blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Chart Container Strict Bounds */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 350px;
+        }
+
+        /* Smooth tab transitions */
+        .tab-indicator {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-accent1 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Background -->
+    <div class="ambient-blob bg-blue-200 w-96 h-96 top-[-10%] left-[-10%]"></div>
+    <div class="ambient-blob bg-cyan-100 w-[500px] h-[500px] top-[20%] right-[-10%] animation-delay-2000"></div>
+    <div class="ambient-blob bg-emerald-100 w-80 h-80 bottom-[10%] left-[20%]"></div>
+
+    <!-- Sticky Glass Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-white/40 top-0 transition-all">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-accent1 to-brand-accent2 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-500/30">
+                        D
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-brand-900">DBC HomeHealth</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#gap" class="text-sm font-semibold text-brand-600 hover:text-brand-900 transition-colors">The Gap</a>
+                    <a href="#science" class="text-sm font-semibold text-brand-600 hover:text-brand-900 transition-colors">Science</a>
+                    <a href="#model" class="text-sm font-semibold text-brand-600 hover:text-brand-900 transition-colors">Service Model</a>
+                    <a href="#impact" class="px-5 py-2.5 rounded-full bg-brand-900 text-white text-sm font-semibold hover:bg-brand-800 transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5">View Impact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel shadow-sm border-brand-200 mb-8 animate-fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-brand-accent1 animate-pulse"></span>
+                <span class="text-xs font-bold tracking-widest uppercase text-brand-600">Strategic Feasibility Model</span>
+            </div>
+            
+            <h1 class="text-5xl lg:text-7xl font-extrabold text-brand-900 tracking-tighter mb-8 leading-[1.1]">
+                Bridging the Gap Between <br class="hidden md:block" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent1 to-brand-accent2">Clinical Care</span> & Home Habitat.
+            </h1>
+            
+            <p class="text-lg lg:text-xl text-brand-600 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+                Deploying trained auditors to apply <strong class="text-brand-900">Design Behaviour Codes (DBC)</strong> in Indian patient homes, mitigating spatial stressors that drive readmission rates.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#science" class="px-8 py-4 rounded-2xl bg-brand-900 text-white font-semibold shadow-[0_8px_30px_rgb(15,23,42,0.2)] hover:shadow-[0_8px_30px_rgb(15,23,42,0.3)] hover:-translate-y-1 transition-all duration-300">
+                    Explore the Methodology
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Gap (Bento Box Architecture) -->
+    <section id="gap" class="py-24 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-brand-900">The Discharge Dilemma</h2>
+                <p class="text-brand-600 text-lg max-w-2xl">World-class clinical gains are routinely erased by structurally deficient home environments. The disparity is measurable.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Bento Item 1: Hospital -->
+                <div class="md:col-span-5 bg-white rounded-3xl p-8 shadow-soft border border-brand-100 hover:border-brand-200 transition-colors group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500 text-8xl font-black">H</div>
+                    <div class="w-12 h-12 rounded-full bg-blue-50 text-brand-accent2 flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        &#10022;
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-brand-900">The Clinical Baseline</h3>
+                    <p class="text-brand-500 leading-relaxed font-medium">
+                        Hospitals utilize Evidence-Based Healthcare Design. Sensory loads are strictly calibrated (acoustics, lux levels) to support physiological stability and neurovisceral integration.
+                    </p>
+                </div>
+
+                <!-- Bento Item 2: Transition -->
+                <div class="md:col-span-2 flex items-center justify-center py-8 md:py-0">
+                    <div class="w-16 h-16 rounded-full glass-panel shadow-soft border-brand-200 flex items-center justify-center text-brand-400">
+                        <span class="text-2xl rotate-90 md:rotate-0 transform transition-transform duration-500">&#10142;</span>
+                    </div>
+                </div>
+
+                <!-- Bento Item 3: Home -->
+                <div class="md:col-span-5 bg-white rounded-3xl p-8 shadow-soft border border-red-100 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-red-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-red-50 text-red-500 flex items-center justify-center text-2xl mb-6 shadow-sm">
+                            &#9888;
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-brand-900">The Home Reality</h3>
+                        <p class="text-brand-500 leading-relaxed font-medium">
+                            Indian homes frequently suffer from harsh threshold gradients, acoustic pollution, and poor circulation. These structural defaults exert continuous neurobiological stress, reversing recovery.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DBC Science (Interactive Segmented Control) -->
+    <section id="science" class="py-24 px-6 bg-brand-900 text-white relative overflow-hidden">
+        <!-- Abstract background elements for dark section -->
+        <div class="absolute top-0 right-0 w-full h-full overflow-hidden z-0 opacity-20 pointer-events-none">
+            <div class="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full border border-brand-700/50"></div>
+            <div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full border border-brand-600/50"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Left: Text content -->
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-800 border border-brand-700 mb-6">
+                        <span class="text-xs font-bold tracking-widest uppercase text-brand-300">The Methodology</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-6">Design Behaviour Codes</h2>
+                    <p class="text-brand-300 text-lg mb-8 leading-relaxed">
+                        DBCs operationalize cognitive science into spatial metrics. Central to this is the <strong>Two-Brain Logic</strong>: environments dictate whether a patient is locked in reactive survival mode (System 1) or can access deliberative healing (System 2).
+                    </p>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <div class="w-8 h-8 rounded-full bg-brand-800 flex items-center justify-center text-brand-accent1 flex-shrink-0 mt-1">1</div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-1">Sensory Load Calibration</h4>
+                                <p class="text-brand-400 text-sm">Managing the autonomic nervous system by controlling environmental stimuli to prevent cognitive override.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <div class="w-8 h-8 rounded-full bg-brand-800 flex items-center justify-center text-brand-accent1 flex-shrink-0 mt-1">2</div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-1">Predictable Modulation</h4>
+                                <p class="text-brand-400 text-sm">Using measurable thresholds (circulation, rhythm) to predictably shift neurobiological states.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Interactive Demonstrator -->
+                <div class="bg-brand-800/50 backdrop-blur-xl border border-brand-700 rounded-3xl p-2 pb-6">
+                    <!-- iOS Style Segmented Control -->
+                    <div class="relative flex p-1 bg-brand-900/50 rounded-2xl mb-6 w-full max-w-md mx-auto mt-4">
+                        <div id="tab-bg" class="absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-brand-700 rounded-xl transition-all duration-300 ease-out shadow-sm"></div>
+                        
+                        <button onclick="switchCognition('system1')" id="btn-sys1" class="relative z-10 flex-1 py-3 text-sm font-bold text-white transition-colors duration-300">
+                            Unmanaged Home
+                        </button>
+                        <button onclick="switchCognition('system2')" id="btn-sys2" class="relative z-10 flex-1 py-3 text-sm font-bold text-brand-400 transition-colors duration-300">
+                            DBC-Optimized
+                        </button>
+                    </div>
+
+                    <!-- Display Area -->
+                    <div id="cog-card" class="mx-4 p-8 rounded-2xl bg-gradient-to-br from-red-500/10 to-red-900/20 border border-red-500/20 transition-all duration-500">
+                        <div class="flex items-center justify-between mb-6">
+                            <h5 id="cog-title" class="font-bold text-2xl text-red-400">System 1 Overload</h5>
+                            <span id="cog-icon" class="text-4xl drop-shadow-md">&#9889;</span>
+                        </div>
+                        <p id="cog-desc" class="text-brand-200 text-base leading-relaxed mb-6">
+                            High ambient noise, sudden lighting transitions, and spatial friction trigger impulsive, reactive stress states. The autonomic nervous system remains elevated.
+                        </p>
+                        <div id="cog-bio" class="px-4 py-3 rounded-xl bg-brand-900/60 border border-brand-700 font-mono text-sm text-brand-300 border-l-4 border-l-red-500 transition-all duration-500">
+                            State: Elevated cortisol, reactive processing.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Operational Model (Dynamic Stepper) -->
+    <section id="model" class="py-24 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-6 text-brand-900">Operationalizing the Vision</h2>
+                <p class="text-brand-600 text-lg font-medium">
+                    Deploying trained teams to execute rapid, low-cost architectural interventions based on precise DBC parameters directly in post-discharge residential spaces.
+                </p>
+            </div>
+
+            <!-- Modern Stepper UI -->
+            <div class="bg-white rounded-3xl shadow-soft border border-brand-100 p-8 md:p-12">
+                <!-- Step Navigation -->
+                <div class="flex justify-between relative mb-12 max-w-4xl mx-auto">
+                    <!-- Progress Line -->
+                    <div class="absolute top-1/2 left-0 w-full h-1 bg-brand-100 -z-10 -translate-y-1/2 rounded-full">
+                        <div id="progress-line" class="h-full bg-brand-accent2 transition-all duration-500 rounded-full" style="width: 0%;"></div>
+                    </div>
+                    
+                    <!-- Steps -->
+                    <button onclick="activateStep(1)" class="relative group outline-none">
+                        <div id="step-dot-1" class="w-10 h-10 rounded-full bg-brand-accent2 text-white font-bold flex items-center justify-center shadow-md transition-all duration-300 ring-4 ring-white">1</div>
+                        <span id="step-text-1" class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold text-brand-900 whitespace-nowrap transition-colors">Prescription</span>
+                    </button>
+                    
+                    <button onclick="activateStep(2)" class="relative group outline-none">
+                        <div id="step-dot-2" class="w-10 h-10 rounded-full bg-brand-100 text-brand-400 font-bold flex items-center justify-center border-2 border-white transition-all duration-300 group-hover:bg-brand-200">2</div>
+                        <span id="step-text-2" class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-brand-400 whitespace-nowrap transition-colors">Audit</span>
+                    </button>
+                    
+                    <button onclick="activateStep(3)" class="relative group outline-none">
+                        <div id="step-dot-3" class="w-10 h-10 rounded-full bg-brand-100 text-brand-400 font-bold flex items-center justify-center border-2 border-white transition-all duration-300 group-hover:bg-brand-200">3</div>
+                        <span id="step-text-3" class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-brand-400 whitespace-nowrap transition-colors">Intervention</span>
+                    </button>
+                    
+                    <button onclick="activateStep(4)" class="relative group outline-none">
+                        <div id="step-dot-4" class="w-10 h-10 rounded-full bg-brand-100 text-brand-400 font-bold flex items-center justify-center border-2 border-white transition-all duration-300 group-hover:bg-brand-200">4</div>
+                        <span id="step-text-4" class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-brand-400 whitespace-nowrap transition-colors">Tracking</span>
+                    </button>
+                </div>
+
+                <!-- Step Content Container -->
+                <div class="relative overflow-hidden rounded-2xl bg-brand-50 border border-brand-100 p-8 md:p-10 min-h-[280px] flex items-center">
+                    <div id="step-content" class="w-full transition-all duration-300 transform opacity-100 translate-y-0">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="flex-1">
+                                <h3 class="text-3xl font-extrabold text-brand-900 mb-4">Partnership & Prescription</h3>
+                                <p class="text-brand-600 text-lg mb-6 leading-relaxed">
+                                    The service integrates with hospital EHR systems. Upon discharge for critical conditions (e.g., cardiac, post-op), physicians formally "prescribe" a DBC Home Assessment based on the patient's sensitivity profile.
+                                </p>
+                            </div>
+                            <div class="flex-1 w-full space-y-4">
+                                <div class="bg-white p-5 rounded-xl border border-brand-100 shadow-sm flex gap-4 items-start">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-accent2 flex items-center justify-center flex-shrink-0 font-bold">&#8608;</div>
+                                    <div>
+                                        <h5 class="font-bold text-brand-900">Data Ingestion</h5>
+                                        <p class="text-sm text-brand-500">Mapping clinical vulnerabilities to environmental stressors.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-5 rounded-xl border border-brand-100 shadow-sm flex gap-4 items-start">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-accent2 flex items-center justify-center flex-shrink-0 font-bold">&#8608;</div>
+                                    <div>
+                                        <h5 class="font-bold text-brand-900">Automated Trigger</h5>
+                                        <p class="text-sm text-brand-500">Dispatching the certified DBC Audit Team to the residence.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & Projections (Premium Chart) -->
+    <section id="impact" class="py-24 px-6 bg-white relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-brand-900">Projected Healthcare ROI</h2>
+                    <p class="text-brand-600 text-lg font-medium">
+                        Theoretical impact modeling based on Ulrich's Evidence-Based Design principles applied to home environments.
+                    </p>
+                </div>
+                <div class="text-sm font-semibold px-4 py-2 bg-brand-50 text-brand-500 rounded-lg border border-brand-100">
+                    Data: Comparative Analysis
+                </div>
+            </div>
+
+            <div class="bg-brand-50 rounded-3xl p-6 md:p-8 border border-brand-100 shadow-inner-light relative">
+                <!-- Strict Chart Container for responsive sizing -->
+                <div class="chart-container relative z-10 w-full bg-white rounded-2xl p-4 shadow-sm border border-brand-100">
+                    <canvas id="premiumImpactChart"></canvas>
+                </div>
+                <div class="mt-6 text-center text-sm text-brand-400 font-medium">
+                    *Hypothetical percentages representing improvements over standard unmanaged discharge protocols.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-900 py-12 border-t border-brand-800 text-brand-400 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="w-12 h-12 rounded-xl bg-brand-800 mx-auto flex items-center justify-center text-white font-bold text-xl mb-6">
+                D
+            </div>
+            <p class="text-sm font-medium">Strategic Architecture Dashboard &bull; Design Behaviour Codes applied to Indian Healthcare Models</p>
+        </div>
+    </footer>
+
+    <!-- Interactivity Logic -->
+    <script>
+        // --- 1. Segmented Control / Tab Logic (Science Section) ---
+        const tabBg = document.getElementById('tab-bg');
+        const btnSys1 = document.getElementById('btn-sys1');
+        const btnSys2 = document.getElementById('btn-sys2');
+        const cogCard = document.getElementById('cog-card');
+        const cogTitle = document.getElementById('cog-title');
+        const cogIcon = document.getElementById('cog-icon');
+        const cogDesc = document.getElementById('cog-desc');
+        const cogBio = document.getElementById('cog-bio');
+
+        const cogData = {
+            system1: {
+                title: "System 1 Overload",
+                desc: "High ambient noise, sudden lighting transitions, and spatial friction trigger impulsive, reactive stress states. The autonomic nervous system remains elevated, halting cellular repair.",
+                bio: "State: Elevated cortisol, active amygdala.",
+                themeClasses: "from-red-500/10 to-red-900/20 border-red-500/20",
+                titleColor: "text-red-400",
+                bioBorder: "border-l-red-500",
+                icon: "&#9889;"
+            },
+            system2: {
+                title: "System 2 Dominance",
+                desc: "Thresholds are buffered, acoustics managed, and lighting aligns with circadian rhythms. The brain perceives structural safety, allowing the deliberative, restorative system to engage.",
+                bio: "State: Parasympathetic dominance, low HRV.",
+                themeClasses: "from-emerald-500/10 to-emerald-900/20 border-emerald-500/20",
+                titleColor: "text-emerald-400",
+                bioBorder: "border-l-emerald-500",
+                icon: "&#10022;"
+            }
+        };
+
+        function switchCognition(type) {
+            // Update Toggle UI
+            if(type === 'system1') {
+                tabBg.style.transform = 'translateX(0)';
+                btnSys1.classList.replace('text-brand-400', 'text-white');
+                btnSys2.classList.replace('text-white', 'text-brand-400');
+            } else {
+                tabBg.style.transform = 'translateX(100%)';
+                tabBg.style.marginLeft = '4px'; // small gap adjust
+                btnSys2.classList.replace('text-brand-400', 'text-white');
+                btnSys1.classList.replace('text-white', 'text-brand-400');
+            }
+
+            // Update Content Data
+            const data = cogData[type];
+            
+            // Fade out
+            cogCard.style.opacity = '0';
+            cogCard.style.transform = 'scale(0.98)';
+            
+            setTimeout(() => {
+                // Remove old theme classes, add new ones safely
+                cogCard.className = `mx-4 p-8 rounded-2xl bg-gradient-to-br border transition-all duration-500 ${data.themeClasses}`;
+                
+                cogTitle.innerHTML = data.title;
+                cogTitle.className = `font-bold text-2xl ${data.titleColor}`;
+                
+                cogIcon.innerHTML = data.icon;
+                cogDesc.innerHTML = data.desc;
+                
+                cogBio.innerHTML = data.bio;
+                cogBio.className = `px-4 py-3 rounded-xl bg-brand-900/60 border border-brand-700 font-mono text-sm text-brand-300 border-l-4 transition-all duration-500 ${data.bioBorder}`;
+                
+                // Fade in
+                cogCard.style.opacity = '1';
+                cogCard.style.transform = 'scale(1)';
+            }, 250);
+        }
+
+        // --- 2. Dynamic Stepper Logic (Operational Model) ---
+        const stepData = {
+            1: {
+                title: "Partnership & Prescription",
+                desc: "The service integrates with hospital EHR systems. Upon discharge for critical conditions (e.g., cardiac, post-op), physicians formally 'prescribe' a DBC Home Assessment based on the patient's sensitivity profile.",
+                box1Title: "Data Ingestion", box1Desc: "Mapping clinical vulnerabilities to environmental stressors.",
+                box2Title: "Automated Trigger", box2Desc: "Dispatching the certified DBC Audit Team to the residence."
+            },
+            2: {
+                title: "DBC Home Audit",
+                desc: "A rapid-deployment team utilizes a digitized subset of the 200+ DBC codes. They measure lux levels, acoustic reverberation, and spatial friction in the specific rooms the patient will inhabit.",
+                box1Title: "Precision Measurement", box1Desc: "Using IoT sensors to establish the baseline stress load.",
+                box2Title: "Algorithmic Analysis", box2Desc: "Identifying specific 'System 1' triggers in the architecture."
+            },
+            3: {
+                title: "Targeted Intervention",
+                desc: "Executing immediate, low-cost micro-interventions. This is not renovation; it is medical-grade environmental modification (e.g., threshold buffering, luminaire replacement, acoustic sealing).",
+                box1Title: "Rapid Deployment", box1Desc: "Implementation completed within 4 hours of arrival.",
+                box2Title: "Strict Guardrails", box2Desc: "Modifications strictly adhere to codified DBC minimums."
+            },
+            4: {
+                title: "Outcome Tracking",
+                desc: "Closing the loop. Patient wearable data (HRV, Sleep Index) is correlated with the new environmental baseline and fed back to the hospital partner to prove readmission reduction ROI.",
+                box1Title: "Biometric Sync", box1Desc: "Continuous remote monitoring via standardized APIs.",
+                box2Title: "Value Verification", box2Desc: "Quantifying the financial ROI of avoided readmissions."
+            }
+        };
+
+        let currentStep = 1;
+
+        function activateStep(step) {
+            currentStep = step;
+            
+            // 1. Update Progress Line
+            const progress = ((step - 1) / 3) * 100;
+            document.getElementById('progress-line').style.width = `${progress}%`;
+
+            // 2. Update Dots and Text
+            for (let i = 1; i <= 4; i++) {
+                const dot = document.getElementById(`step-dot-${i}`);
+                const text = document.getElementById(`step-text-${i}`);
+                
+                if (i < step) {
+                    // Completed
+                    dot.className = "w-10 h-10 rounded-full bg-brand-accent2 text-white font-bold flex items-center justify-center shadow-md transition-all duration-300 ring-4 ring-white";
+                    dot.innerHTML = "&#10003;"; // Checkmark
+                    text.className = "absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold text-brand-900 whitespace-nowrap transition-colors";
+                } else if (i === step) {
+                    // Active
+                    dot.className = "w-10 h-10 rounded-full bg-brand-accent2 text-white font-bold flex items-center justify-center shadow-md transition-all duration-300 ring-4 ring-white scale-110";
+                    dot.innerHTML = i;
+                    text.className = "absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold text-brand-accent2 whitespace-nowrap transition-colors";
+                } else {
+                    // Upcoming
+                    dot.className = "w-10 h-10 rounded-full bg-brand-100 text-brand-400 font-bold flex items-center justify-center border-2 border-white transition-all duration-300 group-hover:bg-brand-200";
+                    dot.innerHTML = i;
+                    text.className = "absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-brand-400 whitespace-nowrap transition-colors";
+                }
+            }
+
+            // 3. Update Content with transition
+            const contentDiv = document.getElementById('step-content');
+            const data = stepData[step];
+
+            contentDiv.style.opacity = '0';
+            contentDiv.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                contentDiv.innerHTML = `
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="flex-1">
+                            <h3 class="text-3xl font-extrabold text-brand-900 mb-4">${data.title}</h3>
+                            <p class="text-brand-600 text-lg mb-6 leading-relaxed">${data.desc}</p>
+                        </div>
+                        <div class="flex-1 w-full space-y-4">
+                            <div class="bg-white p-5 rounded-xl border border-brand-100 shadow-sm flex gap-4 items-start hover:shadow-md transition-shadow">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-accent2 flex items-center justify-center flex-shrink-0 font-bold">&#8608;</div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900">${data.box1Title}</h5>
+                                    <p class="text-sm text-brand-500">${data.box1Desc}</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-brand-100 shadow-sm flex gap-4 items-start hover:shadow-md transition-shadow">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-accent2 flex items-center justify-center flex-shrink-0 font-bold">&#8608;</div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900">${data.box2Title}</h5>
+                                    <p class="text-sm text-brand-500">${data.box2Desc}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                contentDiv.style.opacity = '1';
+                contentDiv.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        // --- 3. Premium Chart.js Init ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('premiumImpactChart').getContext('2d');
+            
+            // Premium Chart Styling Defaults
+            Chart.defaults.font.family = '"Plus Jakarta Sans", sans-serif';
+            Chart.defaults.color = '#64748b'; // brand-500
+            
+            // Gradient for primary dataset
+            let gradientBlue = ctx.createLinearGradient(0, 0, 0, 400);
+            gradientBlue.addColorStop(0, '#0ea5e9'); // cyan
+            gradientBlue.addColorStop(1, '#2563eb'); // blue
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        '30-Day Readmission', 
+                        'Reported Stress (ANS)', 
+                        'Sleep Quality Index', 
+                        'Medication Adherence'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Standard Unmanaged Home',
+                            data: [25, 75, 40, 65], 
+                            backgroundColor: '#e2e8f0', // brand-200
+                            borderRadius: 6, // Modern rounded corners
+                            barPercentage: 0.6,
+                            categoryPercentage: 0.8
+                        },
+                        {
+                            label: 'DBC-Optimized Environment',
+                            data: [12, 35, 80, 85], 
+                            backgroundColor: gradientBlue,
+                            borderRadius: 6,
+                            borderWidth: 0,
+                            barPercentage: 0.6,
+                            categoryPercentage: 0.8
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Fills the container
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            align: 'end',
+                            labels: { 
+                                usePointStyle: true,
+                                padding: 20,
+                                font: { weight: '600' }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)', // brand-900
+                            titleFont: { size: 14, family: '"Plus Jakarta Sans"' },
+                            bodyFont: { size: 13, family: '"Plus Jakarta Sans"' },
+                            padding: 12,
+                            cornerRadius: 8,
+                            boxPadding: 6,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            border: { display: false },
+                            grid: {
+                                color: '#f1f5f9', // brand-100
+                                drawTicks: false,
+                            },
+                            ticks: {
+                                padding: 10,
+                                font: { weight: '500' }
+                            }
+                        },
+                        x: {
+                            border: { display: false },
+                            grid: { display: false },
+                            ticks: {
+                                font: { weight: '600' },
+                                color: '#334155', // brand-700
+                                callback: function(value) {
+                                    // Soft wrapping for long labels
+                                    const label = this.getLabelForValue(value);
+                                    if(label.includes(' ')) {
+                                        return label.split(' ');
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

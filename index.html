@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DBC Clinical Deployment | Architectural Interventions</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Modern Typography: Plus Jakarta Sans for UI, Merriweather for Academic Text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -53,7 +50,7 @@
             color: #0f172a;
         }
 
-        .ambient-grid {
+       .ambient-grid {
             position: absolute;
             inset: 0;
             z-index: 0;
@@ -62,13 +59,13 @@
             background-size: 32px 32px;
         }
 
-        .glass-nav {
+       .glass-nav {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
 
-        .chart-container {
+       .chart-container {
             position: relative;
             width: 100%;
             max-width: 100%;
@@ -80,11 +77,18 @@
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+       .citation {
+            font-size: 0.75rem;
+            color: #64748b;
+            vertical-align: super;
+            margin-left: 2px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-brand-blue selection:text-white relative overflow-x-hidden">
 
-    <!-- Sticky Navigation -->
     <nav class="fixed w-full z-50 glass-nav top-0 transition-all shadow-sm">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-center h-16">
@@ -92,10 +96,11 @@
                     <div class="w-8 h-8 bg-brand-navy flex items-center justify-center text-white font-bold text-sm tracking-widest rounded shadow-sm">DBC</div>
                     <span class="font-bold text-lg tracking-tight text-brand-navy hidden sm:block">Clinical Deployment</span>
                 </div>
-                <div class="hidden md:flex items-center space-x-6">
+                <div class="hidden md:flex items-center space-x-5">
                     <a href="#problem" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">The Gap</a>
                     <a href="#science" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Neurobiology</a>
                     <a href="#audit" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Assessment</a>
+                    <a href="#assessment-checklist" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Checklist</a>
                     <a href="#interventions" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Codes</a>
                     <a href="#pathway" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Pathway</a>
                     <a href="#data" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">ROI Data</a>
@@ -104,7 +109,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 px-6 bg-white overflow-hidden">
         <div class="ambient-grid"></div>
         <div class="max-w-4xl mx-auto text-center relative z-10">
@@ -122,7 +126,6 @@
                 The built environment exerts continuous, measurable influences on physiological states. Discharging patients into structurally deficient homes triggers severe neurovisceral dysregulation, artificially driving India's readmission crisis. We arrest this through codified architectural interventions.
             </p>
             
-            <!-- Partnership Logo (Text Box) -->
             <div class="mt-8 pt-8 border-t border-brand-100 max-w-sm mx-auto flex flex-col items-center">
                 <p class="text-[10px] font-bold tracking-widest uppercase text-brand-400 mb-4">Research & Validation Partner</p>
                 <div class="px-8 py-4 bg-brand-50 border border-brand-200 rounded-xl shadow-sm hover:border-brand-blue hover:shadow-md transition-all cursor-default text-center w-full">
@@ -132,7 +135,6 @@
         </div>
     </section>
 
-    <!-- EXECUTIVE SUMMARY / INTRODUCTION -->
     <section id="introduction" class="py-16 px-6 bg-white relative z-10">
         <div class="max-w-5xl mx-auto">
             <div class="p-8 md:p-12 bg-brand-50 rounded-2xl border-l-4 border-brand-blue shadow-sm">
@@ -155,7 +157,6 @@
         </div>
     </section>
 
-    <!-- SECTION 1: Hard Facts & The Systemic Gap -->
     <section id="problem" class="py-20 px-6 bg-brand-navy border-y border-brand-800 text-white relative">
         <div class="max-w-7xl mx-auto">
             <div class="mb-12 border-l-4 border-brand-accent pl-6">
@@ -164,7 +165,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Fact 1 -->
                 <div class="bg-brand-800/50 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-colors">
                     <div class="text-5xl font-black text-white mb-4 tracking-tighter">1.3<span class="text-xl text-brand-400 font-bold">/1000</span></div>
                     <h3 class="text-sm font-bold uppercase tracking-wider text-brand-accent mb-3">WHO Bed Density Deficit</h3>
@@ -173,7 +173,6 @@
                     </p>
                 </div>
 
-                <!-- Fact 2 -->
                 <div class="bg-brand-800/50 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-colors">
                     <div class="text-5xl font-black text-white mb-4 tracking-tighter">>70<span class="text-xl text-brand-400 font-bold">dB</span></div>
                     <h3 class="text-sm font-bold uppercase tracking-wider text-brand-accent mb-3">Sensory Overload Baseline</h3>
@@ -182,7 +181,6 @@
                     </p>
                 </div>
 
-                <!-- Fact 3 -->
                 <div class="bg-brand-800/50 p-8 rounded-2xl border border-brand-700 hover:border-brand-accent transition-colors">
                     <div class="text-5xl font-black text-white mb-4 tracking-tighter">~22<span class="text-xl text-brand-400 font-bold">%</span></div>
                     <h3 class="text-sm font-bold uppercase tracking-wider text-brand-accent mb-3">30-Day Readmission Tax</h3>
@@ -194,12 +192,10 @@
         </div>
     </section>
 
-    <!-- SECTION 2: The Science -->
     <section id="science" class="py-24 px-6 bg-brand-50 relative">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col lg:flex-row gap-16 items-center">
                 
-                <!-- Left: Academic Text -->
                 <div class="lg:w-1/2">
                     <h2 class="text-xs font-bold tracking-[0.2em] uppercase text-brand-500 mb-4">Original Research Abstract</h2>
                     <h3 class="text-3xl lg:text-4xl font-black text-brand-navy tracking-tight mb-8">Design Behaviour Codes (DBC) Methodology</h3>
@@ -212,12 +208,11 @@
                             "Unlike aesthetic conventions, each DBC specifies a minimum spatial expression and guardrail condition... measurable architectural characteristics that predictably modulate neurobiological processes."
                         </div>
                         <p>
-                            <strong class="font-sans text-brand-navy">The Two-Brain Logic:</strong> Central to the framework is embedding the dual-process model of human cognition [Strack & Deutsch, 2004] into architectural design. The objective is to ensure that the slow, deliberative cognitive system (required for cellular repair) is not overridden by fast, reactive processing caused by environmental stressors.
+                            <strong class="font-sans text-brand-navy">The Two-Brain Logic:</strong> Central to the framework is embedding the dual-process model of human cognition into architectural design. The objective is to ensure that the slow, deliberative cognitive system (required for cellular repair) is not overridden by fast, reactive processing caused by environmental stressors.
                         </p>
                     </div>
                 </div>
 
-                <!-- Right: Neurovisceral Interactive Model -->
                 <div class="lg:w-1/2 w-full">
                     <div class="bg-white p-8 rounded-2xl shadow-lg border border-brand-200">
                         <h4 class="text-sm font-bold uppercase tracking-widest text-brand-navy mb-6 border-b border-brand-100 pb-4 flex justify-between items-center">
@@ -235,17 +230,14 @@
                         </div>
 
                         <div id="brain-data" class="space-y-6 transition-opacity duration-300 min-h-[220px]">
-                            <!-- Content injected via JS -->
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2.5: DBC Home Health Audit - Assessment -->
     <section id="audit" class="py-24 px-6 bg-brand-navy border-t border-brand-800 text-white relative overflow-hidden">
-        <!-- Abstract background elements -->
         <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-blue opacity-5 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto relative z-10">
@@ -261,7 +253,6 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
-                <!-- Left: Assessment Protocol -->
                 <div class="lg:col-span-6 space-y-8">
                     <div class="flex gap-6 items-start">
                         <div class="w-12 h-12 rounded-xl bg-brand-800 flex items-center justify-center text-brand-accent font-black text-xl flex-shrink-0 shadow-sm border border-brand-700">1</div>
@@ -288,10 +279,8 @@
                     </div>
                 </div>
 
-                <!-- Right: Diagnostic UI Panel -->
                 <div class="lg:col-span-6">
                     <div class="bg-brand-900 border border-brand-700 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
-                        <!-- UI Header -->
                         <div class="flex justify-between items-center border-b border-brand-800 pb-4 mb-6">
                             <span class="font-mono text-brand-accent text-xs tracking-widest uppercase">Live Diagnostic Readout</span>
                             <span class="flex h-3 w-3 relative">
@@ -300,7 +289,6 @@
                             </span>
                         </div>
 
-                        <!-- Metric 1 -->
                         <div class="mb-6">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="font-bold text-white">Ambient Acoustic Load</span>
@@ -308,7 +296,6 @@
                             </div>
                             <div class="w-full bg-brand-800 rounded-full h-2.5 mb-2 relative overflow-hidden">
                                 <div class="bg-brand-alert h-2.5 rounded-full" style="width: 85%"></div>
-                                <!-- Target Line -->
                                 <div class="absolute top-0 bottom-0 left-[45%] w-0.5 bg-brand-accent z-10"></div>
                             </div>
                             <div class="flex justify-between text-[10px] font-mono text-brand-400">
@@ -317,7 +304,6 @@
                             </div>
                         </div>
 
-                        <!-- Metric 2 -->
                         <div class="mb-6">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="font-bold text-white">Circadian Lux Volatility</span>
@@ -325,7 +311,6 @@
                             </div>
                             <div class="w-full bg-brand-800 rounded-full h-2.5 mb-2 relative overflow-hidden">
                                 <div class="bg-brand-alert h-2.5 rounded-full" style="width: 70%"></div>
-                                <!-- Target Line -->
                                 <div class="absolute top-0 bottom-0 left-[20%] w-0.5 bg-brand-accent z-10"></div>
                             </div>
                             <div class="flex justify-between text-[10px] font-mono text-brand-400">
@@ -334,7 +319,6 @@
                             </div>
                         </div>
 
-                        <!-- Metric 3 -->
                         <div class="mb-2">
                             <div class="flex justify-between text-sm mb-2">
                                 <span class="font-bold text-white">Spatial Friction Index</span>
@@ -342,7 +326,6 @@
                             </div>
                             <div class="w-full bg-brand-800 rounded-full h-2.5 mb-2 relative overflow-hidden">
                                 <div class="bg-brand-alert h-2.5 rounded-full" style="width: 90%"></div>
-                                <!-- Target Line -->
                                 <div class="absolute top-0 bottom-0 left-[10%] w-0.5 bg-brand-accent z-10"></div>
                             </div>
                             <div class="flex justify-between text-[10px] font-mono text-brand-400">
@@ -363,8 +346,192 @@
         </div>
     </section>
 
-    <!-- SECTION 3: Code Application (Interventions) -->
-    <section id="interventions" class="py-24 px-6 bg-white border-t border-brand-200">
+    <section id="assessment-checklist" class="py-24 px-6 bg-white border-t border-brand-200">
+        <div class="max-w-[90rem] mx-auto">
+            <div class="mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-brand-50 border border-brand-200 mb-4">
+                    <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue">Audit Parameters</span>
+                </div>
+                <h2 class="text-3xl font-black tracking-tight mb-4 text-brand-navy">DBC Home Health Audit - Assessment</h2>
+                <p class="text-brand-600 font-serif max-w-4xl text-sm leading-relaxed">
+                    A comprehensive environmental audit mapped to the top 30 global burden conditions (including Ischaemic Heart Disease, COPD, Stroke, and Diabetes). This matrix defines the strict spatial thresholds, the precise hardware required for measurement, and the clinical outcomes achieved through architectural remediation.[1]
+                </p>
+            </div>
+
+            <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-brand-200">
+                <table class="w-full text-left border-collapse min-w-[1000px]">
+                    <thead class="bg-brand-navy text-white">
+                        <tr>
+                            <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-wider border-b border-brand-800">Sl. No</th>
+                            <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-wider border-b border-brand-800">Environment Factor</th>
+                            <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-wider border-b border-brand-800">Threshold Value</th>
+                            <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-wider border-b border-brand-800">Device to Check</th>
+                            <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-wider border-b border-brand-800">Linked Diseases</th>
+                            <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-wider border-b border-brand-800">Solutions / Intervention</th>
+                            <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-wider border-b border-brand-800">Scientific Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-xs text-brand-700 divide-y divide-brand-100 bg-white">
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">1</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Acoustic Infiltration (Night)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 35 dB</td>
+                            <td class="px-4 py-4">Decibel (dB) Meter</td>
+                            <td class="px-4 py-4">Ischaemic Heart Disease, Hypertension, Stroke</td>
+                            <td class="px-4 py-4">Acoustic zoning, sound-absorbing ceilings, perimeter seals</td>
+                            <td class="px-4 py-4 italic">Dr. Thomas Münzel, Univ. Medical Center Mainz; WHO Environmental Noise Guidelines (2018)</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
+                            <td class="px-4 py-4 font-bold text-brand-navy">2</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Daylight Exposure</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&ge; 300 lux (daytime)</td>
+                            <td class="px-4 py-4">Lux Meter / Light Meter</td>
+                            <td class="px-4 py-4">Stroke, Alzheimer's/Dementia, Depression</td>
+                            <td class="px-4 py-4">Window enlargement, circadian lighting integration</td>
+                            <td class="px-4 py-4 italic">Dr. Roger S. Ulrich, Texas A&M Univ. (2008); Benedetti et al. (2001)</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">3</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Indoor Air Freshness (CO2)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 1000 ppm (ACH &ge; 6-12)</td>
+                            <td class="px-4 py-4">NDIR CO2 Monitor</td>
+                            <td class="px-4 py-4">COPD, Chronic Fatigue, Cognitive Decline</td>
+                            <td class="px-4 py-4">Mechanical ventilation, HEPA filtration, cross-ventilation</td>
+                            <td class="px-4 py-4 italic">Dr. Joseph G. Allen, Harvard T.H. Chan School of Public Health (2016)</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
+                            <td class="px-4 py-4 font-bold text-brand-navy">4</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Particulate Matter (PM2.5)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 12 µg/m&sup3;</td>
+                            <td class="px-4 py-4">Laser PM2.5 Monitor</td>
+                            <td class="px-4 py-4">Lower Respiratory Infections, Asthma, Lung Cancer</td>
+                            <td class="px-4 py-4">Medical-grade HEPA filtration, fresh air ventilation</td>
+                            <td class="px-4 py-4 italic">WHO Indoor Air Quality Guidelines</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">5</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Floor Slip Resistance</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">DCOF &ge; 0.42 (wet), COF > 0.6 (dry)</td>
+                            <td class="px-4 py-4">Tribometer (BOT-3000) / Pendulum Tester</td>
+                            <td class="px-4 py-4">Osteoporosis (Fractures), Traumatic Brain Injury, Road/Fall Injuries</td>
+                            <td class="px-4 py-4">Anti-slip floor treatments, DCOF-rated mats</td>
+                            <td class="px-4 py-4 italic">OSHA Slip Resistance Guidelines [1]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
+                            <td class="px-4 py-4 font-bold text-brand-navy">6</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Thermal Comfort & Stability</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">22&deg;C - 26&deg;C</td>
+                            <td class="px-4 py-4">Digital Hygrometer / Thermometer</td>
+                            <td class="px-4 py-4">Cardiovascular Stress, Multiple Sclerosis (heat sensitivity)</td>
+                            <td class="px-4 py-4">HVAC zoning, thermal mass insulation</td>
+                            <td class="px-4 py-4 italic">ASHRAE Standard 55; Dr. Nori-Sarma (2019) [2]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">7</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Indoor Humidity Balance</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">40% - 60% RH</td>
+                            <td class="px-4 py-4">Digital Hygrometer</td>
+                            <td class="px-4 py-4">Tuberculosis, Allergic Rhinitis, Bronchitis</td>
+                            <td class="px-4 py-4">Active dehumidification, exhaust ventilation</td>
+                            <td class="px-4 py-4 italic">Dr. Mark J. Mendell, California Dept of Public Health (2011)</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
+                            <td class="px-4 py-4 font-bold text-brand-navy">8</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Night-time Light Exposure</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 5 lux at bed level</td>
+                            <td class="px-4 py-4">Lux Meter</td>
+                            <td class="px-4 py-4">Cancer (Melatonin suppression), Insomnia</td>
+                            <td class="px-4 py-4">100% Blackout curtains, elimination of standby LEDs</td>
+                            <td class="px-4 py-4 italic">Chronobiology Studies, Harvard Medical School [1]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">9</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Kitchen Pollutants (VOCs)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">VOC &lt; 500 µg/m&sup3;</td>
+                            <td class="px-4 py-4">TVOC Monitor / Anemometer</td>
+                            <td class="px-4 py-4">Lung Cancer, Ischaemic Heart Disease</td>
+                            <td class="px-4 py-4">Negative pressure kitchen exhaust, physical separation</td>
+                            <td class="px-4 py-4 italic">Dr. Narasimha Rao, Yale School of the Environment [3]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
+                            <td class="px-4 py-4 font-bold text-brand-navy">10</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Circulation Width (Friction)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&ge; 36 inches (900mm)</td>
+                            <td class="px-4 py-4">Laser Distance Measurer</td>
+                            <td class="px-4 py-4">Parkinson’s Disease, Motor Neuron Disease, Arthritis</td>
+                            <td class="px-4 py-4">Furniture re-routing, clutter elimination</td>
+                            <td class="px-4 py-4 italic">Americans with Disabilities Act (ADA) Guidelines [1]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">11</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Transition Threshold Heights</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 12 mm height</td>
+                            <td class="px-4 py-4">Laser Measurer / Calipers</td>
+                            <td class="px-4 py-4">Cerebral Palsy, Muscular Dystrophy</td>
+                            <td class="px-4 py-4">Flush transitions, threshold ramps</td>
+                            <td class="px-4 py-4 italic">National Building Code of India (NBC) 2016/2024 [4]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
+                            <td class="px-4 py-4 font-bold text-brand-navy">12</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Visual Clutter Density</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 20% field obstruction</td>
+                            <td class="px-4 py-4">LiDAR Scanner / NBAIS App</td>
+                            <td class="px-4 py-4">Alzheimer’s/Dementia, Anxiety, Mental Diseases</td>
+                            <td class="px-4 py-4">Concealed storage, streamlined sightlines</td>
+                            <td class="px-4 py-4 italic">Environmental Neuroscience, Princeton University [1]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">13</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Water Contamination / Sanitation</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">Zero Fecal Coliform</td>
+                            <td class="px-4 py-4">TDS & Conductivity Meter</td>
+                            <td class="px-4 py-4">Diarrhoeal Diseases, Hepatitis C & D, Typhoid</td>
+                            <td class="px-4 py-4">RO purification, hygienic plumbing loop systems</td>
+                            <td class="px-4 py-4 italic">WHO WASH Guidelines [5]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
+                            <td class="px-4 py-4 font-bold text-brand-navy">14</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Ergonomic Seating/Working</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">Adj. height 65-125 cm</td>
+                            <td class="px-4 py-4">Measuring Tape</td>
+                            <td class="px-4 py-4">Back and Neck Pain, Musculoskeletal Disorders</td>
+                            <td class="px-4 py-4">Ergonomic furniture, posture support</td>
+                            <td class="px-4 py-4 italic">Dr. Alan Hedge, Cornell University (2016) [1]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">15</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Glare & Luminance Contrast</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">Reflected luminance limits</td>
+                            <td class="px-4 py-4">Glossmeter / Luminance Meter</td>
+                            <td class="px-4 py-4">Migraines, Epilepsy, Eye Dystonia</td>
+                            <td class="px-4 py-4">Diffused lighting, mirror repositioning</td>
+                            <td class="px-4 py-4 italic">Illuminating Engineering Society (IES) Standards [1]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
+                            <td class="px-4 py-4 font-bold text-brand-navy">16</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Dust & Allergen Retention</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">Low dust load (µg/m&sup2;)</td>
+                            <td class="px-4 py-4">Particle Counter</td>
+                            <td class="px-4 py-4">Autoimmune Diseases, Lupus / S.L.E</td>
+                            <td class="px-4 py-4">Washable surfaces, removal of heavy carpets</td>
+                            <td class="px-4 py-4 italic">WHO Indoor Allergens Guidelines [1]</td>
+                        </tr>
+                        <tr class="hover:bg-brand-50 transition-colors">
+                            <td class="px-4 py-4 font-bold text-brand-navy">17</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900">Preterm/NICU Acoustic Stress</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 45 dB</td>
+                            <td class="px-4 py-4">Decibel (dB) Meter</td>
+                            <td class="px-4 py-4">Preterm Birth Complications, Neonatal Stress</td>
+                            <td class="px-4 py-4">Acoustic neonatal/home nursery modifications</td>
+                            <td class="px-4 py-4 italic">Dr. White et al., Pediatrics (2013) [1]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="interventions" class="py-24 px-6 bg-brand-50 border-t border-brand-200">
         <div class="max-w-7xl mx-auto">
             <div class="mb-12">
                 <h2 class="text-3xl font-black tracking-tight mb-2 text-brand-navy">Physical Application of DBCs</h2>
@@ -372,30 +539,27 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Code 1 -->
-                <div class="bg-brand-50 border border-brand-200 p-8 rounded-2xl relative group hover:shadow-md transition-shadow">
-                    <div class="inline-block bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded mb-4">DBC-S14</div>
-                    <h3 class="text-xl font-bold mb-4 text-brand-navy">Sensory Calibration</h3>
+                <div class="bg-white border border-brand-300 p-8 shadow-sm rounded-xl relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="absolute top-0 right-0 bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded-bl-lg">DBC-S14</div>
+                    <h3 class="text-xl font-bold mb-4 text-brand-navy mt-2">Sensory Calibration</h3>
                     <div class="space-y-4 font-serif text-sm text-brand-700">
                         <p><strong class="font-sans text-brand-navy">Target Mechanism:</strong> Mitigation of auditory/visual shock causing autonomic arousal.</p>
                         <p><strong class="font-sans text-brand-navy">Physical Intervention:</strong> Targeted acoustic sealing to primary external apertures. Eradication of >4000K LED flicker. Installation of 2700K circadian-aligned dimmable luminaires in the rest zone.</p>
                     </div>
                 </div>
 
-                <!-- Code 2 -->
-                <div class="bg-brand-50 border border-brand-200 p-8 rounded-2xl relative group hover:shadow-md transition-shadow">
-                    <div class="inline-block bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded mb-4">DBC-T02</div>
-                    <h3 class="text-xl font-bold mb-4 text-brand-navy">Threshold Gradients</h3>
+                <div class="bg-white border border-brand-300 p-8 shadow-sm rounded-xl relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="absolute top-0 right-0 bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded-bl-lg">DBC-T02</div>
+                    <h3 class="text-xl font-bold mb-4 text-brand-navy mt-2">Threshold Gradients</h3>
                     <div class="space-y-4 font-serif text-sm text-brand-700">
                         <p><strong class="font-sans text-brand-navy">Target Mechanism:</strong> Prevention of physiological shock to pupillary and nervous systems upon zone transition.</p>
                         <p><strong class="font-sans text-brand-navy">Physical Intervention:</strong> Erection of rapid-deploy semi-permeable spatial screens. Establishing 'buffer zones' to force physical pacing. Stepping down lux levels between entryways and beds.</p>
                     </div>
                 </div>
 
-                <!-- Code 3 -->
-                <div class="bg-brand-50 border border-brand-200 p-8 rounded-2xl relative group hover:shadow-md transition-shadow">
-                    <div class="inline-block bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded mb-4">DBC-C09</div>
-                    <h3 class="text-xl font-bold mb-4 text-brand-navy">Circulation Continuity</h3>
+                <div class="bg-white border border-brand-300 p-8 shadow-sm rounded-xl relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="absolute top-0 right-0 bg-brand-navy text-white text-xs font-mono px-3 py-1 font-bold rounded-bl-lg">DBC-C09</div>
+                    <h3 class="text-xl font-bold mb-4 text-brand-navy mt-2">Circulation Continuity</h3>
                     <div class="space-y-4 font-serif text-sm text-brand-700">
                         <p><strong class="font-sans text-brand-navy">Target Mechanism:</strong> Removal of spatial friction demanding continuous micro-decisions (System 1 cognitive tax).</p>
                         <p><strong class="font-sans text-brand-navy">Physical Intervention:</strong> Re-routing of primary furniture massing based on patient mobility vectors. Removal of floor friction points. Implementation of visual 'Rhythmic Structural Repetition'.</p>
@@ -405,7 +569,6 @@
         </div>
     </section>
 
-    <!-- SECTION 4: Recovery Pathway (VERTICAL TABS - BULLETPROOF) -->
     <section id="pathway" class="py-24 px-6 bg-brand-navy text-white relative">
         <div class="max-w-7xl mx-auto">
             <div class="mb-12 border-l-4 border-brand-accent pl-6">
@@ -413,10 +576,8 @@
                 <p class="text-brand-300 font-serif max-w-3xl text-lg">The chronological physiological cascade following a DBC architectural intervention. Tracing the biological shift from autonomic arousal to deep cellular repair.</p>
             </div>
 
-            <!-- Bulletproof Dashboard Layout (Vertical tabs on desktop, stack on mobile) -->
             <div class="flex flex-col md:flex-row gap-8 bg-brand-800/40 border border-brand-700 rounded-2xl p-4 md:p-8">
                 
-                <!-- Tab Menu (Left side) -->
                 <div class="flex flex-col gap-2 md:w-1/3 lg:w-1/4">
                     <button onclick="switchPathway('phase1')" id="tab-phase1" class="text-left px-6 py-4 rounded-xl transition-all border border-transparent bg-brand-blue text-white shadow-md">
                         <span class="font-bold uppercase tracking-wider block text-sm">Phase 1: Arrest</span>
@@ -436,26 +597,23 @@
                     </button>
                 </div>
 
-                <!-- Tab Content (Right side) -->
                 <div class="md:w-2/3 lg:w-3/4 bg-brand-900 rounded-2xl border border-brand-700 p-6 md:p-10 flex flex-col justify-center min-h-[350px]">
                     <div id="pathway-content" class="transition-opacity duration-300">
-                        <!-- Content injected via JS -->
-                    </div>
+                        </div>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- SECTION 5: Efficacy Data / ROI -->
-    <section id="data" class="py-24 px-6 bg-brand-50 border-t border-brand-200">
+    <section id="data" class="py-24 px-6 bg-white border-t border-brand-200">
         <div class="max-w-7xl mx-auto">
             <div class="mb-12 border-l-4 border-brand-blue pl-6">
                 <h2 class="text-3xl font-black tracking-tight mb-2 text-brand-navy">Projected Efficacy Data</h2>
-                <p class="text-brand-600 font-serif max-w-3xl">Theoretical modeling applying Ulrich's Evidence-Based Healthcare outcomes to the post-acute residential intervention protocol.</p>
+                <p class="text-brand-700 font-serif max-w-3xl">Theoretical modeling applying Ulrich's Evidence-Based Healthcare outcomes to the post-acute residential intervention protocol.</p>
             </div>
 
-            <div class="bg-white border border-brand-200 p-6 md:p-10 shadow-lg rounded-2xl">
+            <div class="bg-brand-50 border border-brand-200 p-6 md:p-10 shadow-lg rounded-2xl">
                 <div class="chart-container">
                     <canvas id="clinicalDataChart"></canvas>
                 </div>
@@ -466,7 +624,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-brand-navy py-10 border-t border-brand-800 text-brand-400">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex flex-col items-center md:items-start gap-2">
@@ -488,7 +645,6 @@
         </div>
     </footer>
 
-    <!-- Javascript Logic -->
     <script>
         // --- 1. Neurovisceral Toggle Logic ---
         const brainData = {
@@ -536,7 +692,7 @@
                         <p class="font-serif text-brand-700 text-sm">${data.neuro}</p>
                     </div>
                     <div class="p-4 border-l-4 rounded-r-lg ${data.borderClass} ${data.bgClass}">
-                        <span class="${data.accentClass} text-[10px] font-bold uppercase tracking-widest block mb-1">Physiological Outcome [Thayer & Lane, 2000]</span>
+                        <span class="${data.accentClass} text-[10px] font-bold uppercase tracking-widest block mb-1">Physiological Outcome</span>
                         <p class="font-mono text-sm text-brand-900 font-bold">${data.physio}</p>
                     </div>
                 `;
@@ -633,7 +789,7 @@
                     datasets: [
                         {
                             label: 'Standard Uncalibrated Home',
-                            data: [85, 20, 22, 35], 
+                            data: [85, 20, 22, 35],
                             backgroundColor: '#94a3b8',
                             barPercentage: 0.6, categoryPercentage: 0.7,
                             borderRadius: 4

@@ -84,6 +84,56 @@
             margin-left: 2px;
             text-decoration: none;
         }
+
+       /* Checklist Animations */
+       .audit-row {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+       .audit-row.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+       .audit-row:hover td {
+            background-color: #f1f5f9;
+        }
+       .audit-row:hover td:first-child {
+            box-shadow: inset 4px 0 0 0 #0ea5e9;
+        }
+       .threshold-value {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+       .audit-row:hover .threshold-value {
+            color: #1d4ed8;
+            text-shadow: 0 0 12px rgba(14, 165, 233, 0.8);
+            transform: scale(1.08) translateX(4px);
+        }
+        
+        @keyframes scanner {
+            0% { top: 0; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+       .scanner-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #0ea5e9;
+            box-shadow: 0 0 15px 2px #0ea5e9;
+            animation: scanner 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            pointer-events: none;
+            z-index: 20;
+        }
+        
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+       .shimmer-effect {
+            animation: shimmer 2s infinite linear;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-brand-blue selection:text-white relative overflow-x-hidden">
@@ -91,10 +141,10 @@
     <nav class="fixed w-full z-50 glass-nav top-0 transition-all shadow-sm">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
+                <a href="#" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
                     <div class="w-8 h-8 bg-brand-navy flex items-center justify-center text-white font-bold text-sm tracking-widest rounded shadow-sm">DBC</div>
                     <span class="font-bold text-lg tracking-tight text-brand-navy hidden sm:block">Clinical Deployment</span>
-                </div>
+                </a>
                 <div class="hidden md:flex items-center space-x-5">
                     <a href="#problem" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">The Gap</a>
                     <a href="#science" class="text-[11px] font-bold uppercase tracking-wider text-brand-500 hover:text-brand-blue transition-colors">Neurobiology</a>
@@ -348,8 +398,9 @@
     <section id="assessment-checklist" class="py-24 px-6 bg-white border-t border-brand-200">
         <div class="max-w-[90rem] mx-auto">
             <div class="mb-12">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-brand-50 border border-brand-200 mb-4">
-                    <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue">Audit Parameters</span>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-brand-50 border border-brand-200 mb-4 group overflow-hidden relative cursor-default">
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-brand-accent/20 to-transparent -translate-x-full shimmer-effect"></div>
+                    <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue relative z-10">Audit Parameters</span>
                 </div>
                 <h2 class="text-3xl font-black tracking-tight mb-4 text-brand-navy">DBC Home Health Audit - Assessment</h2>
                 <p class="text-brand-600 font-serif max-w-4xl text-sm leading-relaxed">
@@ -357,7 +408,8 @@
                 </p>
             </div>
 
-            <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-brand-200">
+            <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-brand-200 relative">
+                <div class="scanner-line"></div>
                 <table class="w-full text-left border-collapse min-w-[1000px]">
                     <thead class="bg-brand-navy text-white">
                         <tr>
@@ -370,159 +422,159 @@
                             <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-wider border-b border-brand-800">Scientific Reference</th>
                         </tr>
                     </thead>
-                    <tbody class="text-xs text-brand-700 divide-y divide-brand-100 bg-white">
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">1</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Acoustic Infiltration (Night)</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 35 dB</td>
-                            <td class="px-4 py-4">Decibel (dB) Meter</td>
-                            <td class="px-4 py-4">Ischaemic Heart Disease, Hypertension, Stroke</td>
-                            <td class="px-4 py-4">Acoustic zoning, sound-absorbing ceilings, perimeter seals</td>
-                            <td class="px-4 py-4 italic">Dr. Thomas Münzel, Univ. Medical Center Mainz; WHO Environmental Noise Guidelines (2018)</td>
+                    <tbody class="text-xs text-brand-700 divide-y divide-brand-100 bg-white relative z-10">
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">1</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Acoustic Infiltration (Night)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&lt; 35 dB</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Decibel (dB) Meter</td>
+                            <td class="px-4 py-4 transition-all duration-300">Ischaemic Heart Disease, Hypertension, Stroke</td>
+                            <td class="px-4 py-4 transition-all duration-300">Acoustic zoning, sound-absorbing ceilings, perimeter seals</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Dr. Thomas Münzel, Univ. Medical Center Mainz; WHO Environmental Noise Guidelines (2018)</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
-                            <td class="px-4 py-4 font-bold text-brand-navy">2</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Daylight Exposure</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&ge; 300 lux (daytime)</td>
-                            <td class="px-4 py-4">Lux Meter / Light Meter</td>
-                            <td class="px-4 py-4">Stroke, Alzheimer's/Dementia, Depression</td>
-                            <td class="px-4 py-4">Window enlargement, circadian lighting integration</td>
-                            <td class="px-4 py-4 italic">Dr. Roger S. Ulrich, Texas A&M Univ. (2008); Benedetti et al. (2001)</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">2</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Daylight Exposure</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&ge; 300 lux (daytime)</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Lux Meter / Light Meter</td>
+                            <td class="px-4 py-4 transition-all duration-300">Stroke, Alzheimer's/Dementia, Depression</td>
+                            <td class="px-4 py-4 transition-all duration-300">Window enlargement, circadian lighting integration</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Dr. Roger S. Ulrich, Texas A&M Univ. (2008); Benedetti et al. (2001)</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">3</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Indoor Air Freshness (CO2)</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 1000 ppm (ACH &ge; 6-12)</td>
-                            <td class="px-4 py-4">NDIR CO2 Monitor</td>
-                            <td class="px-4 py-4">COPD, Chronic Fatigue, Cognitive Decline</td>
-                            <td class="px-4 py-4">Mechanical ventilation, HEPA filtration, cross-ventilation</td>
-                            <td class="px-4 py-4 italic">Dr. Joseph G. Allen, Harvard T.H. Chan School of Public Health (2016)</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">3</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Indoor Air Freshness (CO2)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&lt; 1000 ppm (ACH &ge; 6-12)</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">NDIR CO2 Monitor</td>
+                            <td class="px-4 py-4 transition-all duration-300">COPD, Chronic Fatigue, Cognitive Decline</td>
+                            <td class="px-4 py-4 transition-all duration-300">Mechanical ventilation, HEPA filtration, cross-ventilation</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Dr. Joseph G. Allen, Harvard T.H. Chan School of Public Health (2016)</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
-                            <td class="px-4 py-4 font-bold text-brand-navy">4</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Particulate Matter (PM2.5)</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 12 µg/m&sup3;</td>
-                            <td class="px-4 py-4">Laser PM2.5 Monitor</td>
-                            <td class="px-4 py-4">Lower Respiratory Infections, Asthma, Lung Cancer</td>
-                            <td class="px-4 py-4">Medical-grade HEPA filtration, fresh air ventilation</td>
-                            <td class="px-4 py-4 italic">WHO Indoor Air Quality Guidelines</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">4</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Particulate Matter (PM2.5)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&lt; 12 µg/m&sup3;</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Laser PM2.5 Monitor</td>
+                            <td class="px-4 py-4 transition-all duration-300">Lower Respiratory Infections, Asthma, Lung Cancer</td>
+                            <td class="px-4 py-4 transition-all duration-300">Medical-grade HEPA filtration, fresh air ventilation</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">WHO Indoor Air Quality Guidelines</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">5</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Floor Slip Resistance</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">DCOF &ge; 0.42 (wet), COF > 0.6 (dry)</td>
-                            <td class="px-4 py-4">Tribometer (BOT-3000) / Pendulum Tester</td>
-                            <td class="px-4 py-4">Osteoporosis (Fractures), Traumatic Brain Injury, Road/Fall Injuries</td>
-                            <td class="px-4 py-4">Anti-slip floor treatments, DCOF-rated mats</td>
-                            <td class="px-4 py-4 italic">OSHA Slip Resistance Guidelines [1]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">5</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Floor Slip Resistance</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">DCOF &ge; 0.42 (wet), COF > 0.6 (dry)</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Tribometer (BOT-3000) / Pendulum Tester</td>
+                            <td class="px-4 py-4 transition-all duration-300">Osteoporosis (Fractures), Traumatic Brain Injury, Road/Fall Injuries</td>
+                            <td class="px-4 py-4 transition-all duration-300">Anti-slip floor treatments, DCOF-rated mats</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">OSHA Slip Resistance Guidelines [1]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
-                            <td class="px-4 py-4 font-bold text-brand-navy">6</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Thermal Comfort & Stability</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">22&deg;C - 26&deg;C</td>
-                            <td class="px-4 py-4">Digital Hygrometer / Thermometer</td>
-                            <td class="px-4 py-4">Cardiovascular Stress, Multiple Sclerosis (heat sensitivity)</td>
-                            <td class="px-4 py-4">HVAC zoning, thermal mass insulation</td>
-                            <td class="px-4 py-4 italic">ASHRAE Standard 55; Dr. Nori-Sarma (2019) [2]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">6</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Thermal Comfort & Stability</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">22&deg;C - 26&deg;C</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Digital Hygrometer / Thermometer</td>
+                            <td class="px-4 py-4 transition-all duration-300">Cardiovascular Stress, Multiple Sclerosis (heat sensitivity)</td>
+                            <td class="px-4 py-4 transition-all duration-300">HVAC zoning, thermal mass insulation</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">ASHRAE Standard 55; Dr. Nori-Sarma (2019) [2]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">7</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Indoor Humidity Balance</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">40% - 60% RH</td>
-                            <td class="px-4 py-4">Digital Hygrometer</td>
-                            <td class="px-4 py-4">Tuberculosis, Allergic Rhinitis, Bronchitis</td>
-                            <td class="px-4 py-4">Active dehumidification, exhaust ventilation</td>
-                            <td class="px-4 py-4 italic">Dr. Mark J. Mendell, California Dept of Public Health (2011)</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">7</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Indoor Humidity Balance</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">40% - 60% RH</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Digital Hygrometer</td>
+                            <td class="px-4 py-4 transition-all duration-300">Tuberculosis, Allergic Rhinitis, Bronchitis</td>
+                            <td class="px-4 py-4 transition-all duration-300">Active dehumidification, exhaust ventilation</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Dr. Mark J. Mendell, California Dept of Public Health (2011)</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
-                            <td class="px-4 py-4 font-bold text-brand-navy">8</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Night-time Light Exposure</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 5 lux at bed level</td>
-                            <td class="px-4 py-4">Lux Meter</td>
-                            <td class="px-4 py-4">Cancer (Melatonin suppression), Insomnia</td>
-                            <td class="px-4 py-4">100% Blackout curtains, elimination of standby LEDs</td>
-                            <td class="px-4 py-4 italic">Chronobiology Studies, Harvard Medical School [1]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">8</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Night-time Light Exposure</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&lt; 5 lux at bed level</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Lux Meter</td>
+                            <td class="px-4 py-4 transition-all duration-300">Cancer (Melatonin suppression), Insomnia</td>
+                            <td class="px-4 py-4 transition-all duration-300">100% Blackout curtains, elimination of standby LEDs</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Chronobiology Studies, Harvard Medical School [1]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">9</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Kitchen Pollutants (VOCs)</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">VOC &lt; 500 µg/m&sup3;</td>
-                            <td class="px-4 py-4">TVOC Monitor / Anemometer</td>
-                            <td class="px-4 py-4">Lung Cancer, Ischaemic Heart Disease</td>
-                            <td class="px-4 py-4">Negative pressure kitchen exhaust, physical separation</td>
-                            <td class="px-4 py-4 italic">Dr. Narasimha Rao, Yale School of the Environment [3]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">9</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Kitchen Pollutants (VOCs)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">VOC &lt; 500 µg/m&sup3;</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">TVOC Monitor / Anemometer</td>
+                            <td class="px-4 py-4 transition-all duration-300">Lung Cancer, Ischaemic Heart Disease</td>
+                            <td class="px-4 py-4 transition-all duration-300">Negative pressure kitchen exhaust, physical separation</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Dr. Narasimha Rao, Yale School of the Environment [3]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
-                            <td class="px-4 py-4 font-bold text-brand-navy">10</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Circulation Width (Friction)</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&ge; 36 inches (900mm)</td>
-                            <td class="px-4 py-4">Laser Distance Measurer</td>
-                            <td class="px-4 py-4">Parkinson’s Disease, Motor Neuron Disease, Arthritis</td>
-                            <td class="px-4 py-4">Furniture re-routing, clutter elimination</td>
-                            <td class="px-4 py-4 italic">Americans with Disabilities Act (ADA) Guidelines [1]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">10</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Circulation Width (Friction)</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&ge; 36 inches (900mm)</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Laser Distance Measurer</td>
+                            <td class="px-4 py-4 transition-all duration-300">Parkinson’s Disease, Motor Neuron Disease, Arthritis</td>
+                            <td class="px-4 py-4 transition-all duration-300">Furniture re-routing, clutter elimination</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Americans with Disabilities Act (ADA) Guidelines [1]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">11</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Transition Threshold Heights</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 12 mm height</td>
-                            <td class="px-4 py-4">Laser Measurer / Calipers</td>
-                            <td class="px-4 py-4">Cerebral Palsy, Muscular Dystrophy</td>
-                            <td class="px-4 py-4">Flush transitions, threshold ramps</td>
-                            <td class="px-4 py-4 italic">National Building Code of India (NBC) 2016/2024 [4]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">11</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Transition Threshold Heights</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&lt; 12 mm height</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Laser Measurer / Calipers</td>
+                            <td class="px-4 py-4 transition-all duration-300">Cerebral Palsy, Muscular Dystrophy</td>
+                            <td class="px-4 py-4 transition-all duration-300">Flush transitions, threshold ramps</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">National Building Code of India (NBC) 2016/2024 [4]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
-                            <td class="px-4 py-4 font-bold text-brand-navy">12</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Visual Clutter Density</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 20% field obstruction</td>
-                            <td class="px-4 py-4">LiDAR Scanner / NBAIS App</td>
-                            <td class="px-4 py-4">Alzheimer’s/Dementia, Anxiety, Mental Diseases</td>
-                            <td class="px-4 py-4">Concealed storage, streamlined sightlines</td>
-                            <td class="px-4 py-4 italic">Environmental Neuroscience, Princeton University [1]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">12</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Visual Clutter Density</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&lt; 20% field obstruction</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">LiDAR Scanner / NBAIS App</td>
+                            <td class="px-4 py-4 transition-all duration-300">Alzheimer’s/Dementia, Anxiety, Mental Diseases</td>
+                            <td class="px-4 py-4 transition-all duration-300">Concealed storage, streamlined sightlines</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Environmental Neuroscience, Princeton University [1]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">13</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Water Contamination / Sanitation</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">Zero Fecal Coliform</td>
-                            <td class="px-4 py-4">TDS & Conductivity Meter</td>
-                            <td class="px-4 py-4">Diarrhoeal Diseases, Hepatitis C & D, Typhoid</td>
-                            <td class="px-4 py-4">RO purification, hygienic plumbing loop systems</td>
-                            <td class="px-4 py-4 italic">WHO WASH Guidelines [5]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">13</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Water Contamination / Sanitation</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">Zero Fecal Coliform</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">TDS & Conductivity Meter</td>
+                            <td class="px-4 py-4 transition-all duration-300">Diarrhoeal Diseases, Hepatitis C & D, Typhoid</td>
+                            <td class="px-4 py-4 transition-all duration-300">RO purification, hygienic plumbing loop systems</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">WHO WASH Guidelines [5]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
-                            <td class="px-4 py-4 font-bold text-brand-navy">14</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Ergonomic Seating/Working</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">Adj. height 65-125 cm</td>
-                            <td class="px-4 py-4">Measuring Tape</td>
-                            <td class="px-4 py-4">Back and Neck Pain, Musculoskeletal Disorders</td>
-                            <td class="px-4 py-4">Ergonomic furniture, posture support</td>
-                            <td class="px-4 py-4 italic">Dr. Alan Hedge, Cornell University (2016) [1]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">14</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Ergonomic Seating/Working</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">Adj. height 65-125 cm</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Measuring Tape</td>
+                            <td class="px-4 py-4 transition-all duration-300">Back and Neck Pain, Musculoskeletal Disorders</td>
+                            <td class="px-4 py-4 transition-all duration-300">Ergonomic furniture, posture support</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Dr. Alan Hedge, Cornell University (2016) [1]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">15</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Glare & Luminance Contrast</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">Reflected luminance limits</td>
-                            <td class="px-4 py-4">Glossmeter / Luminance Meter</td>
-                            <td class="px-4 py-4">Migraines, Epilepsy, Eye Dystonia</td>
-                            <td class="px-4 py-4">Diffused lighting, mirror repositioning</td>
-                            <td class="px-4 py-4 italic">Illuminating Engineering Society (IES) Standards [1]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">15</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Glare & Luminance Contrast</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">Reflected luminance limits</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Glossmeter / Luminance Meter</td>
+                            <td class="px-4 py-4 transition-all duration-300">Migraines, Epilepsy, Eye Dystonia</td>
+                            <td class="px-4 py-4 transition-all duration-300">Diffused lighting, mirror repositioning</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Illuminating Engineering Society (IES) Standards [1]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors bg-brand-50/30">
-                            <td class="px-4 py-4 font-bold text-brand-navy">16</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Dust & Allergen Retention</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">Low dust load (µg/m&sup2;)</td>
-                            <td class="px-4 py-4">Particle Counter</td>
-                            <td class="px-4 py-4">Autoimmune Diseases, Lupus / S.L.E</td>
-                            <td class="px-4 py-4">Washable surfaces, removal of heavy carpets</td>
-                            <td class="px-4 py-4 italic">WHO Indoor Allergens Guidelines [1]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">16</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Dust & Allergen Retention</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">Low dust load (µg/m&sup2;)</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Particle Counter</td>
+                            <td class="px-4 py-4 transition-all duration-300">Autoimmune Diseases, Lupus / S.L.E</td>
+                            <td class="px-4 py-4 transition-all duration-300">Washable surfaces, removal of heavy carpets</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">WHO Indoor Allergens Guidelines [1]</td>
                         </tr>
-                        <tr class="hover:bg-brand-50 transition-colors">
-                            <td class="px-4 py-4 font-bold text-brand-navy">17</td>
-                            <td class="px-4 py-4 font-semibold text-brand-900">Preterm/NICU Acoustic Stress</td>
-                            <td class="px-4 py-4 font-mono text-brand-blue">&lt; 45 dB</td>
-                            <td class="px-4 py-4">Decibel (dB) Meter</td>
-                            <td class="px-4 py-4">Preterm Birth Complications, Neonatal Stress</td>
-                            <td class="px-4 py-4">Acoustic neonatal/home nursery modifications</td>
-                            <td class="px-4 py-4 italic">Dr. White et al., Pediatrics (2013) [1]</td>
+                        <tr class="audit-row bg-white">
+                            <td class="px-4 py-4 font-bold text-brand-navy transition-all duration-300">17</td>
+                            <td class="px-4 py-4 font-semibold text-brand-900 transition-all duration-300">Preterm/NICU Acoustic Stress</td>
+                            <td class="px-4 py-4 font-mono text-brand-blue transition-all duration-300"><span class="threshold-value inline-block">&lt; 45 dB</span></td>
+                            <td class="px-4 py-4 transition-all duration-300">Decibel (dB) Meter</td>
+                            <td class="px-4 py-4 transition-all duration-300">Preterm Birth Complications, Neonatal Stress</td>
+                            <td class="px-4 py-4 transition-all duration-300">Acoustic neonatal/home nursery modifications</td>
+                            <td class="px-4 py-4 italic transition-all duration-300">Dr. White et al., Pediatrics (2013) [1]</td>
                         </tr>
                     </tbody>
                 </table>
@@ -728,6 +780,7 @@
             const container = document.getElementById('brain-data');
             const data = brainData[state];
             
+            // Explicitly set exact classes to avoid conflicts
             btn1.className = `flex-1 py-3 px-4 text-xs font-bold uppercase tracking-wider border-2 rounded-lg transition-all ${data.btn1}`;
             btn2.className = `flex-1 py-3 px-4 text-xs font-bold uppercase tracking-wider border-2 rounded-lg transition-all ${data.btn2}`;
 
@@ -843,7 +896,7 @@
                         {
                             label: 'DBC Audited Environment',
                             data: [30, 75, 4, 82], 
-                            backgroundColor: '#1d4ed8',
+                            backgroundColor: '#1d4ed8', // brand-blue
                             barPercentage: 0.6, categoryPercentage: 0.7,
                             borderRadius: 4
                         }
